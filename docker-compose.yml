@@ -6,7 +6,7 @@ services:
     ports:
       - "80:80"
     volumes:
-      - .:/usr/share/nginx/html
+      - .:/app
     environment:
       - NODE_ENV=production
     restart: always
