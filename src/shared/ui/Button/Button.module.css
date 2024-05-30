@@ -1,0 +1,26 @@
+.btn {
+    background: var(--main-btn-color);
+    border-radius: 8px;
+    color: var(--white);
+    padding: 6px 16px;
+    font-weight: 500;
+    height: 36px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background: var(--main-btn-color-hover);
+    transition-duration: 150ms;
+    color: var(--white);
+    scale: 1.05;
+}
+
+.transparent {
+    background: transparent;
+    border: 1px var(--main-btn-color) solid;
+    color: var(--main-btn-color);
+}

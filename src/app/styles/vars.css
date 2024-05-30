@@ -1,0 +1,13 @@
+:root {
+    --first-color: #1a1f27;
+    --second-color: #16171a;
+    --third-color: #4b4b4e;
+    --deep-darkblue: #1a202a;
+    --darkblue: #222a39;
+    --white: #ffffff;
+    --main-btn-color: #f6a600;
+    --main-btn-color-hover: #f6a600;
+    --pale-orange: #d4a233;
+    --main-btn-color-rgb: 247, 166, 0;
+    --header-height: 78px;
+}

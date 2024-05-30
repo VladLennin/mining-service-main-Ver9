@@ -1,0 +1,54 @@
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 16px 8px 8px 8px;
+}
+
+.counter {
+    background: var(--deep-darkblue);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    align-items: center;
+    width: 100%;
+    border-radius: 90px;
+    border: 1px solid var(--main-btn-color);
+}
+
+.counterValue {}
+
+.counter>button {
+    color: var(--main-btn-color);
+    background: transparent;
+    display: flex;
+    align-items: center;
+    border: none;
+    width: 100%;
+    font-weight: 200;
+    font-size: 30px;
+    cursor: pointer;
+    transition-duration: 300ms;
+}
+
+.minusBtn {
+    justify-content: start;
+
+}
+
+.plusBtn {
+    justify-content: end;
+
+}
+
+.counter>p {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--main-btn-color);
+}
+
+.buyBtn {
+    border-radius: 90px;
+    font-weight: 700;
+    font-size: 20px;
+}

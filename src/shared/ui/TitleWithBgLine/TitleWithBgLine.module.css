@@ -1,0 +1,19 @@
+.title {
+    font-size: 32px;
+    color: white;
+    /* background: url("../../../assets/title-bg.svg") no-repeat 32px 0; */
+
+    padding-top: 8px;
+    margin-bottom: 24px;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 40px;
+    color: var(--white);
+    text-align: left;
+
+
+    @media (width < 500px) {
+        padding: 0;
+        text-align: center;
+    }
+}

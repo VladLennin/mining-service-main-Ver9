@@ -1,0 +1,87 @@
+{
+    "general": {
+        "title-logo": "MODOK",
+        "get-money": "Retirer",
+        "start-earning":"Commencer à extraire",
+        "card-earning": {
+            "part-1": "Extraction de jeton - ",
+            "part-2": " en 1 jour",
+            "earned": "Gagné"
+        }
+    },
+    "header": {
+        "token-counter": {
+            "balance": "Solde"
+        }
+    },
+    "buttons": {
+        "buy-btn": "Acheter"
+    },
+    "footer": {
+        "subtitle": "NFT unique sur notre plateforme",
+        "about": {
+            "title": "À propos de nous",
+            "link-1": "À propos",
+            "link-2": "Conditions d'utilisation"
+        },
+        "contacts": {
+            "title": "Nous contacter",
+            "link-1": "Pour les projets NFT",
+            "link-2": "Pour les KOLs"
+        },
+        "support": {
+            "title": "Support",
+            "link-1": "Centre d'aide"
+        },
+        "subscribe": {
+            "title": "Suivez-nous"
+        },
+        "rights": "© 2018-2024 Bybit.com Tous droits réservés.",
+        "usage-rules": "Conditions d'utilisation"
+    },
+    "auth": {
+        "registration": "Authentification",
+        "login": "Connexion"
+    },
+    "mainpage": {
+        "central-block": {
+            "title": "Les méchants règnent sur le monde. Rejoignez-nous!",
+            "subtitle": "Mème pièce avec laquelle vous gagnez de l'argent",
+            "detail-btn": "Explorer",
+            "support-blockchain": "Blockchain supportées"
+        },
+        "faq-block": {
+            "title": "FAQ",
+            "description": "Le minage de crypto-monnaie est le processus par lequel les ordinateurs résolvent des problèmes mathématiques pour vérifier et confirmer les transactions sur la blockchain. Un service de minage de crypto-monnaie offre aux utilisateurs la possibilité de louer de la puissance de calcul ou d'utiliser leurs propres ressources informatiques pour participer à ce processus. Notre service de minage de crypto-monnaie offre une solution fiable et efficace pour ceux qui souhaitent entrer dans le monde du minage sans avoir à acheter et configurer du matériel spécialisé. Nous fournissons un accès à des serveurs haute performance et à une infrastructure cloud, permettant à nos clients de miner de la crypto-monnaie sans dépenses de temps et de ressources inutiles."
+        },
+        "about-us-block": {
+            "title": "À propos du projet",
+            "feature-1": {
+                "title": "Exploitation de jetons disponible"
+            },
+            "feature-2": {
+                "title": "Cartes NFT LIMITÉES"
+            },
+            "feature-3": {
+                "title": "Gains pour les membres de la communauté"
+            },
+            "description": {
+                "title": " - est une pièce de mème sur la blockchain Ethereum avec laquelle vous pouvez gagner de l'argent.",
+                "content": "La tokenomique du projet est conçue pour maximiser la durée de vie du projet et le potentiel de gains pour les membres de la communauté."
+            }
+        },
+        "populars-block": {
+            "title": "Collections",
+            "detail-btn": "Voir plus >"
+        },
+        "how-to-earn-block": {
+            "title": "Comment obtenir un jeton",
+            "cards": {
+                "card-1": "Choisissez un héros",
+                "card-2": "Activez les cartes NFT",
+                "card-3": "Le héros extrait des jetons",
+                "card-4": "Vendez et échangez les jetons extraits"
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  font-family: "Raleway";
+  line-height: normal;
+  font-style: normal;
+
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+}
+
+html{
+  background: var(--first-color);
+}

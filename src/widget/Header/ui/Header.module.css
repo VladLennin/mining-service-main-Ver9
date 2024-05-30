@@ -1,0 +1,78 @@
+.headerDesktop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    background: transparent;
+    padding: 0 15px;
+    /* height: var(--header-height); */
+
+    /* position: fixed; */
+    margin-top: 25px;
+    width: 100%;
+
+    padding: 0 100px;
+
+    @media (width < 900px) {
+        display: none !important;
+    }
+
+    @media (width < 1150px) {
+        padding: 0 20px;
+    }
+
+}
+
+.subcontainerDesktop {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+
+.headerMobile {
+    display: none;
+    background: transparent;
+
+    @media (width < 500px) {
+        display: block;
+        padding: 10px;
+    }
+
+}
+
+.logoLangContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.headerTablet {
+    display: none;
+
+    @media (width < 900px) and (width > 500px) {
+        display: block;
+        padding: 10px;
+    }
+}
+
+.subcontainerTablet {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.earnedTablet {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.langAuthContainer {
+    display: flex;
+    align-items: center !important;
+    gap: 20px;
+}

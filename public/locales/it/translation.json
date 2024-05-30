@@ -1,0 +1,87 @@
+{
+    "general": {
+        "title-logo": "MODOK",
+        "get-money": "Ritirare",
+        "start-earning":"Iniziare a estrarre",
+        "card-earning": {
+            "part-1": "Estrazione del token - ",
+            "part-2": " in 1 giorno",
+            "earned": "Guadagnato"
+        }
+    },
+    "header": {
+        "token-counter": {
+            "balance": "Bilancio"
+        }
+    },
+    "buttons": {
+        "buy-btn": "Acquista"
+    },
+    "footer": {
+        "subtitle": "NFT unico sulla nostra piattaforma",
+        "about": {
+            "title": "Chi siamo",
+            "link-1": "Informazioni",
+            "link-2": "Termini di servizio"
+        },
+        "contacts": {
+            "title": "Contattaci",
+            "link-1": "Per i progetti NFT",
+            "link-2": "Per i KOL"
+        },
+        "support": {
+            "title": "Supporto",
+            "link-1": "Centro assistenza"
+        },
+        "subscribe": {
+            "title": "Seguici"
+        },
+        "rights": "© 2018-2024 Bybit.com Tutti i diritti riservati.",
+        "usage-rules": "Termini di utilizzo"
+    },
+    "auth": {
+        "registration": "Autenticazione",
+        "login": "Accesso"
+    },
+    "mainpage": {
+        "central-block": {
+            "title": "I cattivi dominano il mondo. Unisciti a noi!",
+            "subtitle": "Moneta meme con cui guadagni denaro",
+            "detail-btn": "Esplora",
+            "support-blockchain": "Blockchain supportate"
+        },
+        "faq-block": {
+            "title": "Domande frequenti",
+            "description": "Il mining di criptovaluta è il processo mediante il quale i computer risolvono problemi matematici per verificare e confermare le transazioni sulla blockchain. Un servizio di mining di criptovaluta offre agli utenti la possibilità di noleggiare potenza di calcolo o utilizzare le proprie risorse informatiche per partecipare a questo processo. Il nostro servizio di mining di criptovaluta offre una soluzione affidabile ed efficiente per coloro che desiderano entrare nel mondo del mining senza dover acquistare e configurare apparecchiature specializzate. Forniamo accesso a server ad alte prestazioni e infrastruttura cloud, consentendo ai nostri clienti di minare criptovaluta senza sprechi di tempo e risorse."
+        },
+        "about-us-block": {
+            "title": "Informazioni sul progetto",
+            "feature-1": {
+                "title": "Mining del token disponibile"
+            },
+            "feature-2": {
+                "title": "Carte NFT LIMITATE"
+            },
+            "feature-3": {
+                "title": "Guadagni per i membri della comunità"
+            },
+            "description": {
+                "title": " - è una moneta meme sulla blockchain Ethereum con cui è possibile guadagnare denaro.",
+                "content": "La tokenomica del progetto è progettata per massimizzare la durata del progetto e il potenziale di guadagno per i membri della comunità."
+            }
+        },
+        "populars-block": {
+            "title": "Collezioni",
+            "detail-btn": "Visualizza altro >"
+        },
+        "how-to-earn-block": {
+            "title": "Come ottenere un token",
+            "cards": {
+                "card-1": "Scegli un eroe",
+                "card-2": "Attiva le carte NFT",
+                "card-3": "L'eroe estrae i token",
+                "card-4": "Vendi e scambia i token estratti"
+            }
+        }
+    }
+}

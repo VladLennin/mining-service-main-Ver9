@@ -1,0 +1,17 @@
+.container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo{
+    height: 88px;
+    width: 88px;
+
+    @media (width < 500px){
+        height: 50px;
+        width: 50px;
+    }
+}
+
+

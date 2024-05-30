@@ -1,0 +1,60 @@
+{
+  "name": "mining-service",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.84",
+    "@types/react": "^18.2.60",
+    "@types/react-dom": "^18.2.19",
+    "axios": "^1.6.7",
+    "compose-function": "^3.0.3",
+    "ethers": "^6.12.0",
+    "firebase": "^10.8.1",
+    "framer-motion": "^11.0.20",
+    "i18next": "^23.10.0",
+    "i18next-browser-languagedetector": "^7.2.0",
+    "i18next-http-backend": "^2.5.0",
+    "mobx": "^6.12.0",
+    "mobx-react-lite": "^4.0.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^14.0.5",
+    "react-responsive-carousel": "^3.2.23",
+    "react-router-dom": "^6.22.1",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4",
+    "web3": "^4.8.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/compose-function": "^0.0.33"
+  }
+}

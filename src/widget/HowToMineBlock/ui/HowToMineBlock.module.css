@@ -1,0 +1,73 @@
+.container {
+    height: 650px;
+    position: relative;
+    overflow: hidden;
+    @media (width < 500px) {
+        margin-top: 65px;
+        height: max-content;
+    }
+}
+
+.titleContainer {
+    padding: 0 100px;
+
+    @media (width < 500px) {
+        padding: 0;
+        text-align: center;
+    }
+}
+
+.mainContainerDesktop {
+    position: absolute;
+    left: -15vw;
+    width: 120vw;
+    display: block;
+
+    @media (width < 1200px) {
+        display: none;
+    }
+}
+
+.mainContainerDesktop .infoCardsContainer {
+    margin-top: 20px;
+    display: flex;
+    width: 100%;
+    overflow:hidden ;
+    gap: 20px;
+}
+
+.mainContainerMobile {
+    display: none;
+
+    @media (width < 500px) {
+        display: block;
+    }
+}
+
+.mainContainerMobile .infoCardsContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.mainContainerTablet {
+    display: none;
+    padding: 50px 30px;
+
+    @media (width < 1200px) and (width > 500px) {
+        display: block;
+    }
+}
+
+.infoCardsTablet {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 15px;
+    gap: 15px;
+
+}
+

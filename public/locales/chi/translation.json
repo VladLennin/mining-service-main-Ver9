@@ -1,0 +1,87 @@
+{
+    "general": {
+        "title-logo": "MODOK",
+        "get-money": "撤回",
+        "start-earning":"开始开采",
+        "card-earning": {
+            "part-1": "代币提取 - ",
+            "part-2": " 1天内",
+            "earned": "已赚取"
+        }
+    },
+    "header": {
+        "token-counter": {
+            "balance": "余额"
+        }
+    },
+    "buttons": {
+        "buy-btn": "购买"
+    },
+    "footer": {
+        "subtitle": "我们平台的独特NFT",
+        "about": {
+            "title": "关于我们",
+            "link-1": "关于",
+            "link-2": "服务条款"
+        },
+        "contacts": {
+            "title": "联系我们",
+            "link-1": "NFT 项目",
+            "link-2": "KOL"
+        },
+        "support": {
+            "title": "支持",
+            "link-1": "帮助中心"
+        },
+        "subscribe": {
+            "title": "关注我们"
+        },
+        "rights": "© 2018-2024 Bybit.com 保留所有权利。",
+        "usage-rules": "使用条款"
+    },
+    "auth": {
+        "registration": "认证",
+        "login": "登录"
+    },
+    "mainpage": {
+        "central-block": {
+            "title": "恶棍统治世界。加入我们！",
+            "subtitle": "携带您赚钱的模因币",
+            "detail-btn": "探索",
+            "support-blockchain": "支持的区块链"
+        },
+        "faq-block": {
+            "title": "常见问题解答",
+            "description": "加密货币挖矿是计算机解决数学问题以验证和确认区块链上交易的过程。加密货币挖矿服务为用户提供了租用计算能力或使用自己的计算资源参与此过程的能力。我们的加密货币挖矿服务为希望进入挖矿世界的人提供了可靠和高效的解决方案，而无需购买和设置专业设备。我们提供高性能服务器和云基础设施的访问，使客户可以在不浪费时间和资源的情况下挖矿加密货币。"
+        },
+        "about-us-block": {
+            "title": "关于项目",
+            "feature-1": {
+                "title": "可用代币挖矿"
+            },
+            "feature-2": {
+                "title": "限量NFT卡"
+            },
+            "feature-3": {
+                "title": "社区成员的收入"
+            },
+            "description": {
+                "title": " - 是以太坊区块链上的模因币，您可以用它赚钱。",
+                "content": "项目的代币经济设计旨在最大化项目的寿命并为社区成员提供赚钱的机会。"
+            }
+        },
+        "populars-block": {
+            "title": "收藏品",
+            "detail-btn": "查看更多 >"
+        },
+        "how-to-earn-block": {
+            "title": "如何获取代币",
+            "cards": {
+                "card-1": "选择一个英雄",
+                "card-2": "激活NFT卡",
+                "card-3": "英雄挖矿代币",
+                "card-4": "出售和交换挖到的代币"
+            }
+        }
+    }
+}

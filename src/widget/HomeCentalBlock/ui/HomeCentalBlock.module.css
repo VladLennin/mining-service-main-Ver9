@@ -1,0 +1,168 @@
+.container {
+    padding: 0 100px;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+
+    @media (width < 1150px) {
+        padding: 0 20px;
+    }
+
+    @media (width < 900px) {
+        grid-template-columns: 1fr;
+        padding: 0 20px;
+    }
+
+    @media (width < 500px) {
+        grid-template-columns: 1fr;
+        padding: 0 10px;
+        margin-top: 50px;
+    }
+
+}
+
+.subcontainer1 {
+    height: 100%;
+    position: relative;
+    z-index: 1;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+
+    @media (width < 500px) {
+        gap: 10px;
+    }
+}
+
+.subcontainer1>* {
+    z-index: 10;
+    position: relative;
+    width: fit-content;
+    word-break: normal;
+}
+
+.cover {
+    background: rgba(51, 51, 51, 0, 6);
+    backdrop-filter: blur(40px);
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: 5;
+}
+
+.title {
+    font-size: 44px;
+    font-weight: 700;
+
+    @media (width < 500px) {
+        font-size: 24px;
+    }
+}
+
+.subtitle {
+    font-size: 24px;
+    color: var(--main-btn-color);
+    font-style: italic;
+    font-weight: 400;
+
+    @media (width < 500px) {
+        font-size: 16px;
+    }
+}
+
+.support {
+    font-size: 16px;
+    color: var(--third-color);
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 5;
+}
+
+.support>p {
+    margin-right: 10px;
+}
+
+.subcontainer2 {
+    width: 100%;
+    min-height: 90vh;
+    position: relative;
+
+    @media (width < 1200px) {
+        min-height: 55vh;
+        /* width: 50vw; */
+    }
+
+    @media (width < 900px) {
+        /* width: 90vw; */
+    }
+
+    @media (width < 500px) {
+        /* width: 95vw; */
+    }
+
+}
+
+.villainImage {
+    margin: auto;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    /* height: 100%; */
+    position: absolute;
+    width: 100%;
+    animation: villain 5s cubic-bezier(0.16, 0, 0.58, 1) infinite forwards;
+
+    /* @media (width < 1200px) {
+        width: 65%;
+    }
+
+    @media (width < 500px) {
+        width: 90%;
+    } */
+}
+
+@keyframes villain {
+    0% {
+        top: 0px
+    }
+
+
+
+    50% {
+        top: 30px
+    }
+
+
+
+    100% {
+        top: 0px;
+    }
+}
+
+.detailBtn1 {
+    display: block;
+    width: max(20vw, 150px);
+
+    @media (width < 500px) {
+        display: none !important;
+    }
+}
+
+.detailBtn2 {
+    width: 90%;
+}
+
+.detailBtn2Container {
+    display: none !important;
+    width: 100%;
+
+    @media (width < 500px) {
+        display: flex !important;
+        justify-content: center;
+    }
+}

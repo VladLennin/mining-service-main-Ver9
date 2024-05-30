@@ -1,0 +1,70 @@
+.container {
+    background: var(--second-color);
+    padding: 40px 60px;
+    display: grid;
+    grid-template-columns: 4fr 2fr 2fr 2fr 3fr;
+}
+
+.subtitle {
+    color: var(--third-color);
+    font-size: 14px;
+    line-height: 22px;
+    margin-top: 8px;
+}
+
+.col>p,
+.followCol>p {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 26px;
+    color: var(--white);
+    margin-bottom: 24px;
+}
+
+.col>div {
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: .5px;
+    color: var(--third-color);
+}
+
+.linksContainer {
+    display: flex;
+    gap: 10px;
+}
+
+.linksContainer>a {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+
+.discordLink {
+    background: url("./../../../assets/join-discord.099b28a8.svg");
+}
+
+.telegramLink {
+    background: url("./../../../assets/join-twitter.bea22620.svg");
+}
+
+.twitterLink {
+    background: url("./../../../assets/join-telegram.37891658.svg");
+}
+
+
+
+.rightsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 18px;
+    color: rgba(221, 222, 255, .4);
+}
+
+

@@ -1,0 +1,11 @@
+.container {
+    margin: 0 auto 100px;
+    max-width: 1200px;
+}
+
+.description {
+    font-size: 14px;
+    line-height: 22px;
+    color: var(--third-color);
+    background: var(--second-color);
+}

@@ -1,0 +1,87 @@
+{
+  "general": {
+    "title-logo": "MODOK",
+    "get-money":"Withdraw",
+    "start-earning":"Start mining",
+    "card-earning": {
+      "part-1": "Token extraction - ",
+      "part-2": " in 1 day",
+      "earned": "Earned"
+    }
+  },
+  "header": {
+    "token-counter": {
+      "balance": "Balance"
+    }
+  },
+  "buttons": {
+    "buy-btn": "Buy"
+  },
+  "footer": {
+    "subtitle": "Unique NFT on our platform",
+    "about": {
+      "title": "About us",
+      "link-1": "About",
+      "link-2": "Terms of Service"
+    },
+    "contacts": {
+      "title": "Get In Touch",
+      "link-1": "For NFT projects",
+      "link-2": "For KOLs"
+    },
+    "support": {
+      "title": "Support",
+      "link-1": "Help Center"
+    },
+    "subscribe": {
+      "title": "Follow us"
+    },
+    "rights": "© 2018-2024 Bybit.com All rights reserved.",
+    "usage-rules": "Terms of use"
+  },
+  "auth": {
+    "registration": "Auth",
+    "login": "Login"
+  },
+  "mainpage": {
+    "central-block": {
+      "title": "Villains rule the world. Join us!",
+      "subtitle": "Meme coin with which you earn money",
+      "detail-btn": "Explore",
+      "support-blockchain": "Supported Blockchains"
+    },
+    "faq-block": {
+      "title": "FAQ",
+      "description": "Cryptocurrency mining is the process by which computers solve mathematical problems to verify and confirm transactions on the blockchain. A cryptocurrency mining service provides users with the ability to rent computational power or use their own computing resources to participate in this process. Our cryptocurrency mining service offers a reliable and efficient solution for those looking to enter the world of mining without the need to purchase and set up specialized equipment. We provide access to high-performance servers and cloud infrastructure, allowing our clients to mine cryptocurrency without unnecessary time and resource expenditures."
+    },
+    "about-us-block": {
+      "title": "About project",
+      "feature-1": {
+        "title": "Available token mining"
+      },
+      "feature-2": {
+        "title": "Limited NFT CARDS"
+      },
+      "feature-3": {
+        "title": "Earnings for community members"
+      },
+      "description": {
+        "title": " – is a meme coin on the Ethereum blockchain with which you can make money.",
+        "content": "The tokenomics of the project is designed to maximize the lifespan of the project and the earning potential for community members."
+      }
+    },
+    "populars-block": {
+      "title": "Collections",
+      "detail-btn": "View more >"
+    },
+    "how-to-earn-block": {
+      "title": "How to get a token",
+      "cards": {
+        "card-1": "Choose a hero",
+        "card-2": "Activate NFT cards",
+        "card-3": "Hero mines tokens",
+        "card-4": "Sell and exchange mined tokens"
+      }
+    }
+  }
+}
