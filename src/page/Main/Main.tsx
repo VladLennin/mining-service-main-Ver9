@@ -3,11 +3,10 @@ import AboutUsBlock from "../../widget/AboutUsBlock";
 import PopularsBlock from "../../widget/CollectionsBlock";
 import HowToMineBlock from "../../widget/HowToMineBlock";
 
-
-
 const Main = () => {
   return (
     <div>
+      {/* <button onClick={SoundService.makeSound}>play</button> */}
       <HomeCentalBlock />
 
       <PopularsBlock />
