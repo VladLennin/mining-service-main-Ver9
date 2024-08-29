@@ -1,0 +1,40 @@
+.container {
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.userCard {
+    width: fit-content;
+    background: rgb(237, 164, 0);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.balance {
+    display: flex;
+    align-items: center;
+}
+.amount{
+    font-weight: 700;
+    font-size: 32px;
+    margin: 0 10px
+}
+
+.diamond {
+    width: 25px;
+}
+
+.btnBuy{
+    padding: 10px;
+    border-radius: 8px;
+    background: rgb(26, 32, 39);
+    color:white;
+    font-weight: 800;
+    border: none;
+}
