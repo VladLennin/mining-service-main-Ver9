@@ -22,6 +22,12 @@ class UserStore {
     const res = await UserService.withdrawBalance(userId, amount);
     return res.data;
   }
+
+  @action 
+  async refillDiamonds(userId:number, amount:number){
+    const res = await UserService.refillDiamonds(userId, amount);
+    return res.data;
+  }
 }
 
 export const userStore = new UserStore();

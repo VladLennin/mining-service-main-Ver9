@@ -16,4 +16,5 @@ export type User = {
     consecutiveDays: number;
     lastLogin: Date;
     gotRefBonus: boolean;
+    diamondsBalance:number;
   };
