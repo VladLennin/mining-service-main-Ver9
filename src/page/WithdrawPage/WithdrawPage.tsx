@@ -24,7 +24,9 @@ const WithdrawPage = () => {
       <div className={css.container}>
         <div className={css.userCard}>
           <div className={css.username}>{user?.username}</div>
-          <div className={css.balance}>Balance: {user?.balance}</div>
+          <div className={css.balance}>
+            Balance: {Math.round(user?.balance * 100) / 100}
+          </div>
           <div className={css.withdrawContainer}>
             <input
               defaultValue={amountWithdraw}
