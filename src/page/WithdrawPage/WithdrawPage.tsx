@@ -3,6 +3,7 @@ import css from "./WithdrawPage.module.css";
 import { useParams } from "react-router-dom";
 import { userStore } from "../../entity/user/store/UserStore";
 import { User } from "../../entity/user/model/types";
+import Spinner from "../../feature/Spinner/Spinner";
 
 const WithdrawPage = () => {
   const { userId } = useParams();
@@ -56,7 +57,11 @@ const WithdrawPage = () => {
       </div>
     );
   } else {
-    return <div>Error happened</div>;
+    return (
+      <div className={css.container}>
+        <Spinner />
+      </div>
+    );
   }
 };
 
