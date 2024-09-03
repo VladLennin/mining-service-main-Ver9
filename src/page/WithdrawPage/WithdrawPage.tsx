@@ -30,6 +30,8 @@ const WithdrawPage = () => {
           </div>
           <div className={css.withdrawContainer}>
             <input
+              min={0}
+              max={user.balance}
               defaultValue={amountWithdraw}
               onChange={(e) => {
                 setAmountWithdraw(e.target.valueAsNumber);
