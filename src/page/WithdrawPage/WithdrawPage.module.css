@@ -36,6 +36,7 @@
     border-radius: 8px;
     border:none;
     text-align: center;
+    min-width: 50px;
 }
 
 .withdrawBtn {

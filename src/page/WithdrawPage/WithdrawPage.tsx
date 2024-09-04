@@ -34,15 +34,16 @@ const WithdrawPage = () => {
               max={user.balance}
               defaultValue={amountWithdraw}
               onChange={(e) => {
-                setAmountWithdraw(e.target.valueAsNumber);
+                  setAmountWithdraw(e.target.valueAsNumber);
               }}
               className={css.withdrawAmount}
               type="number"
             />
             <button
+              disabled={amountWithdraw > user.balance}
               onClick={() =>
                 userStore
-                  .withdrawBalance(user?.id, amountWithdraw)
+                  .withdrawBalance(user?.id, Math.abs(amountWithdraw))
                   .then((res) => {
                     setUser(res);
                   })
