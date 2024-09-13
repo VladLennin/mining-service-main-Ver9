@@ -42,6 +42,8 @@ const WithdrawPage = () => {
             <button
               disabled={amountWithdraw > user.balance}
               onClick={() =>
+
+                //TODO:Коментарій смарт контракту
                 userStore
                   .withdrawBalance(user?.id, Math.abs(amountWithdraw))
                   .then((res) => {

@@ -12,6 +12,7 @@ const BuyDiamondsPage = () => {
   const [user, setUser] = useState<User>();
 
   const handleBuy = () => {
+    //TODO:Коментарій смарт контракту
     userId &&
       amount &&
       userStore
