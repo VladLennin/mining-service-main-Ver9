@@ -4,7 +4,7 @@ import css from "./BuyDiamonsPage.module.css";
 import { userStore } from "../../entity/user/store/UserStore";
 import { User } from "../../entity/user/model/types";
 import Spinner from "../../feature/Spinner/Spinner";
-import diamond from "../../assets/diamond.webp";
+import diamond from "../../assets/diamond.png";
 
 import { Web3 } from "web3";
 import { SecondAddress } from "../../AddressContract";
@@ -15,9 +15,13 @@ var web3: any;
 var account: any;
 
 const BuyDiamondsPage = () => {
-  const { userId, amount } = useParams();
+  const { userId, token, amount } = useParams();
   const [user, setUser] = useState<User>();
-  const { token } = useParams();
+
+  const amounts: number[] = [100, 500, 1000, 1500, 5000];
+
+  token && localStorage.setItem("token", token);
+
   const handleBuy = async () => {
     let contract: any;
     try {
@@ -68,6 +72,16 @@ const BuyDiamondsPage = () => {
           console.log(e);
         });
   }, []);
+
+  if (amount) {
+    if (!amounts.includes(Number(amount))) {
+      return (
+        <div className={css.container}>
+          Something happened with your amount of super coins
+        </div>
+      );
+    }
+  }
 
   if (user) {
     return (
