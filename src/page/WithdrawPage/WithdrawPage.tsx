@@ -5,6 +5,14 @@ import { userStore } from "../../entity/user/store/UserStore";
 import { User } from "../../entity/user/model/types";
 import Spinner from "../../feature/Spinner/Spinner";
 
+import {Web3} from "web3";
+import { SecondAddress } from "../../AddressContract";
+import { SecondContractABI } from "../../ABI";
+
+declare var window: any
+var web3: any;
+var account: any;
+
 const WithdrawPage = () => {
   const { userId } = useParams();
   const [user, setUser] = useState<User>();
@@ -41,17 +49,38 @@ const WithdrawPage = () => {
             />
             <button
               disabled={amountWithdraw > user.balance}
-              onClick={() =>
-
-                //TODO:Коментарій смарт контракту
-                userStore
-                  .withdrawBalance(user?.id, Math.abs(amountWithdraw))
-                  .then((res) => {
-                    setUser(res);
-                  })
-                  .catch((e) => {
-                    console.log(e);
-                  })
+              onClick={async() => {
+                let contract : any;
+                try{
+                  if (window.ethereum) {
+                      try {
+                          const accounts = await window.ethereum.request({
+                              method: "eth_requestAccounts",
+                          });
+                          web3 = new Web3(window.ethereum);
+                          account = accounts[0];
+                      } catch (error) {
+                          console.log("Error connecting...");
+                      }
+                  } else {
+                      console.log("Download Metamask");
+                  }
+              
+                  contract = new web3.eth.Contract(SecondContractABI, SecondAddress);
+                  contract.methods.BuyTokens(amountWithdraw).send({from: account}).then(()=>
+                    userStore
+                    .withdrawBalance(user?.id, Math.abs(amountWithdraw))
+                    .then((res) => {
+                      setUser(res);
+                    })
+                    .catch((e) => {
+                      console.log(e);
+                    })
+                    )
+                } catch (e){
+                  console.log(e);
+                }
+                }  
               }
               className={css.withdrawBtn}
             >

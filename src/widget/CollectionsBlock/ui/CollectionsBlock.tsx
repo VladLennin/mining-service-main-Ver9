@@ -4,7 +4,6 @@ import TitleWithBgLine from "../../../shared/ui/TitleWithBgLine/TitleWithBgLine"
 import css from "./CollectionsBlock.module.css";
 import {useTranslation} from "react-i18next";
 import {useEffect, useState} from "react";
-import { id } from "ethers";
 
 import {Web3} from "web3";
 import {ContractTokenABI} from "../../../ABI";
@@ -12,7 +11,6 @@ import {AddressToken} from "../../../AddressContract";
 
 import {ContractABI} from "../../../ABI";
 import {Address} from "../../../AddressContract";
-import { contract } from "web3/lib/commonjs/eth.exports";
 
 declare var window: any
 var web3: any;
