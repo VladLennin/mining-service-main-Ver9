@@ -17,7 +17,7 @@ var account: any;
 const BuyDiamondsPage = () => {
   const { userId, amount } = useParams();
   const [user, setUser] = useState<User>();
-
+  const { token } = useParams();
   const handleBuy = async () => {
     let contract: any;
     try {

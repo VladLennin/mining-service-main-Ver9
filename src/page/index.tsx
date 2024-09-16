@@ -8,7 +8,7 @@ const Routing = () => {
     <Routes>
       <Route path={"/"} element={<Main />} />
       {/* <Route path={"/withdraw/:userId"} element={<WithdrawPage />} /> */}
-      <Route path={"/diamonds/:amount/:userId"} element={<BuyDiamondsPage />} />
+      <Route path={"/diamonds/:amount/:userId/:token"} element={<BuyDiamondsPage />} />
     </Routes>
   );
 };
