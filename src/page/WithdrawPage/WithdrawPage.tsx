@@ -14,9 +14,11 @@ var web3: any;
 var account: any;
 
 const WithdrawPage = () => {
-  const { userId } = useParams();
+  const { userId,token } = useParams();
+  token && localStorage.setItem("token", token);
   const [user, setUser] = useState<User>();
   const [amountWithdraw, setAmountWithdraw] = useState(0);
+  
   useEffect(() => {
     userId &&
       userStore
@@ -28,6 +30,16 @@ const WithdrawPage = () => {
           console.log(e);
         });
   }, []);
+
+  if (!token) {
+    return (
+      <div className={css.container}>
+        <div className={css.userCard}>Your session went wrong</div>
+      </div>
+    );
+  }
+
+
   if (user) {
     return (
       <div className={css.container}>

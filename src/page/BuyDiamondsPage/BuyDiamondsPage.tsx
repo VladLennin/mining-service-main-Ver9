@@ -77,10 +77,20 @@ const BuyDiamondsPage = () => {
     if (!amounts.includes(Number(amount))) {
       return (
         <div className={css.container}>
-          Something happened with your amount of super coins
+          <div className={css.userCard}>
+            Something happened with your amount of super coins
+          </div>
         </div>
       );
     }
+  }
+
+  if (!token) {
+    return (
+      <div className={css.container}>
+        <div className={css.userCard}>Your session went wrong</div>
+      </div>
+    );
   }
 
   if (user) {
