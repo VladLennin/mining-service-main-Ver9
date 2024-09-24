@@ -40,22 +40,21 @@ const BuyDiamondsPage = () => {
       }
 
       contract = new web3.eth.Contract(SecondContractABI, SecondAddress);
-      contract.methods
-        .SendToken(amount, account)
-        .send({ from: account })
-        .then(() => {
-          userId &&
-            amount &&
-            userStore
-              .refillDiamonds(Number(userId), Number(amount))
-              .then((res) => {
-                alert("Your balance was refilled!");
-                setUser(res);
-              })
-              .catch((e) => {
-                console.log(e);
-              });
-        });
+      userId &&
+        amount &&
+          contract.methods.BuyTokens(amount)
+            .send({ from: account })
+            .then(() => {
+              userStore
+                .refillDiamonds(Number(userId), Number(amount))
+                .then((res) => {
+                  alert("Your balance was refilled!");
+                  setUser(res);
+                })
+                .catch((e) => {
+                  console.log(e);
+                });
+            });
     } catch (e) {
       console.log(e);
     }
