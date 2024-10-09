@@ -60,10 +60,10 @@
 
 .imgContainer {
     position: absolute;
-    bottom: -15px;
-    left: calc(50% - 40px);
-    height: 40px;
-    width: 40px;
+    bottom: -45px;
+    left: calc(50% - 30px);
+    height: 70px;
+    width: 70px;
 }
 
 .imgContainer>img {

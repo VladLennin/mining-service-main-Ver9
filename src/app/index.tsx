@@ -17,12 +17,13 @@ var account: any;
 const App = () => {
     const [isAuth, setIsAuth] = useState<boolean>(false);
     const [balance, setBalance] = useState<number>(0);
+    const location = window.location.href
 
-    async function authorization () {// авторизація
+    async function authorization() {// авторизація
         console.log("Authorization");
-        try{
+        try {
 
- //////////////////////////////////////////////////////////////////////////           
+            //////////////////////////////////////////////////////////////////////////
             if (window.ethereum) {
                 try {
                     const accounts = await window.ethereum.request({
@@ -36,30 +37,36 @@ const App = () => {
             } else {
                 console.log("Download Metamask");
             }
- /////////////////////////////////////////////////////////////////////////////               
+            /////////////////////////////////////////////////////////////////////////////
 
             let contract = new web3.eth.Contract(ContractTokenABI, AddressToken);
             setIsAuth(true);
-            
-            setBalance(web3.utils.fromWei( await contract.methods.balanceOf(account).call(), 'ether'));//your variable
 
-            
-           ;
-        }catch (e){
+            setBalance(web3.utils.fromWei(await contract.methods.balanceOf(account).call(), 'ether'));//your variable
+
+
+            ;
+        } catch (e) {
             console.log(e);
         }
     }
 
+    console.log(location)
+    const isAdminRoute = location.includes("/admin");
+
     return (
         <>
-            <AppearBlock direction="top">
-                <Header authorization = {authorization} balance = {balance} isAuth={isAuth}/>
-            </AppearBlock>
+            {!isAdminRoute && (
+                <AppearBlock direction="top">
+                    <Header authorization={authorization} balance={balance} isAuth={isAuth}/>
+                </AppearBlock>
+            )}
             <div className="content" id="content">
                 <Routing/>
             </div>
 
-            <Footer/>
+
+            {!isAdminRoute && <Footer />}
         </>
     );
 };
