@@ -20,10 +20,10 @@ const AdminPage = () => {
                     response = await fetch('https://modok-back-cold-butterfly-4160.fly.dev/api/statistic/application');
                     break;
                 case 'playerStats':
-                    response = await fetch('/api/playerStats');
+                    response = await fetch('https://modok-back-cold-butterfly-4160.fly.dev/api/statistic/user?userId=312312');
                     break;
                 case 'sessionStats':
-                    response = await fetch('/api/sessionStats');
+                    response = await fetch('https://modok-back-cold-butterfly-4160.fly.dev/api/statistic/game-session?userId=3123122');
                     break;
                 default:
                     return;
@@ -46,14 +46,14 @@ const AdminPage = () => {
     }, [activeTab]);
 
     const renderContent = () => {
-        if (loading) return <p>Загрузка...</p>;
-        if (error) return <p>Ошибка: {error}</p>;
+        // if (loading) return <p>Загрузка...</p>;
+        // if (error) return <p>Ошибка: {error}</p>;
 
         switch (activeTab) {
             case 'players':
                 return (
                     <div>
-                        <h2 className="text-2xl">Гравці (Чекаю ендпоінт)</h2>
+                        <h2 className="text-2xl">Пользователи (Жду ендпоинт)</h2>
                         {/*<ul>*/}
                         {/*    {data && data.map(player => (*/}
                         {/*        <li key={player.id}>{player.name}</li>*/}
@@ -64,7 +64,7 @@ const AdminPage = () => {
             case 'appStats':
                 return (
                     <div>
-                        <h2 className="text-2xl">Статистика по додатку</h2>
+                        <h2 className="text-2xl">Статистика по приложению</h2>
                         {/* Здесь разместите статистику по приложению */}
                         <p>{JSON.stringify(data)}</p>
                     </div>
@@ -72,7 +72,7 @@ const AdminPage = () => {
             case 'playerStats':
                 return (
                     <div>
-                        <h2 className="text-2xl">Загальна статистика по гравцю</h2>
+                        <h2 className="text-2xl">Общая статистика по пользователю</h2>
                         {/* Здесь разместите статистику по игроку */}
                         <p>{JSON.stringify(data)}</p>
                     </div>
@@ -80,7 +80,7 @@ const AdminPage = () => {
             case 'sessionStats':
                 return (
                     <div>
-                        <h2 className="text-2xl">Сессійна статистика по гравцю</h2>
+                        <h2 className="text-2xl">Сессионная статистика по пользователю</h2>
                         {/* Здесь разместите сессионную статистику по игроку */}
                         <p>{JSON.stringify(data)}</p>
                     </div>
@@ -104,10 +104,10 @@ const AdminPage = () => {
                                 className={`flex items-center justify-center w-full h-10 rounded-xl cursor-pointer 
                                     ${activeTab === tab ? 'bg-gray-600 text-gray-200' : 'hover:bg-gray-600 hover:text-gray-200'}`}
                             >
-                                <p className={'text-left px-2 w-full'}>{tab === 'players' ? 'Гравці' :
-                                    tab === 'appStats' ? 'Статистика по додатку' :
-                                        tab === 'playerStats' ? 'Загальна статистика по гравцю' :
-                                            'Сессійна статистика по гравцю'}</p>
+                                <p className={'text-left px-2 w-full'}>{tab === 'players' ? 'Пользователи' :
+                                    tab === 'appStats' ? 'Статистика по приложению' :
+                                        tab === 'playerStats' ? 'Общая статистика по пользователю' :
+                                            'Сессионная статистика по пользователю'}</p>
                             </div>
                         ))}
                     </div>
