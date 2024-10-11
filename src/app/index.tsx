@@ -51,7 +51,6 @@ const App = () => {
         }
     }
 
-    console.log(location)
     const isAdminRoute = location.includes("/admin");
 
     return (
