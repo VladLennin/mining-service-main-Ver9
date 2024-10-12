@@ -10,6 +10,8 @@ import {Pie} from "react-chartjs-2";
 import TableReact from "./TableReact";
 import {checkTokenExpiry} from "../../app/services/checkTokenExpire";
 import {useNavigate} from "react-router-dom";
+import UsersTable from "./UsersTable";
+import {PulseLoader} from "react-spinners";
 
 interface LanguageDistribution {
     language_code: string;
@@ -125,6 +127,11 @@ const AdminPage = () => {
         checkTokenExpiry(navigate)
         fetchData(activeTab);
     }, [activeTab]);
+
+    const handleTabChange = (tab:string) => {
+        setActiveTab(tab);
+        setData(null);
+    };
 
 
     const renderAppStats = (data: AppStats) => {
@@ -286,45 +293,33 @@ const AdminPage = () => {
     };
 
     const renderUsers = (users : User[])=>{
-        console.log(users)
-
         return (
-            <div>
-                <h2 className="text-2xl">Пользователи</h2>
+            <div className={'w-full h-full'}>
+                <h2 className="text-2xl pb-2">Пользователи</h2>
+                <UsersTable data={users}/>
             </div>
         )
     }
 
     const renderContent = () => {
-        if (loading) return <p>Загрузка...</p>;
+        if (loading) return (
+            <div className={'h-screen flex items-center justify-center'}>
+                <PulseLoader loading={loading}/>
+            </div>
+        );
         if (error) return <p>Ошибка: {error}</p>;
 
         switch (activeTab) {
             case 'players':
-                if (data && typeof data === 'object') {
+                if (data) {
                     return renderUsers(data as User[]);
                 }
-                return <p>Загрузка...</p>;
+                return null
             case 'appStats':
-                if (data && typeof data === 'object' && 'averageBalance' in data) {
+                if (data) {
                     return renderAppStats(data as AppStats);
                 }
-                return <p>Загрузка...</p>;
-
-            case 'playerStats':
-                return (
-                    <div>
-                        <h2 className="text-2xl">Общая статистика по пользователю</h2>
-                        <p>{JSON.stringify(data)}</p>
-                    </div>
-                );
-            case 'sessionStats':
-                return (
-                    <div>
-                        <h2 className="text-2xl">Сессионная статистика по пользователю</h2>
-                        <p>{JSON.stringify(data)}</p>
-                    </div>
-                );
+                return null;
             default:
                 return null;
         }
@@ -337,18 +332,16 @@ const AdminPage = () => {
                     <p className={'text-2xl'}>Modok Admin Panel</p>
                     <hr/>
                     <div className={'flex flex-col pt-4 items-center justify-center gap-4'}>
-                        {['players', 'appStats', 'playerStats', 'sessionStats'].map((tab) => (
+                        {['players', 'appStats'].map((tab) => (
                             <div
                                 key={tab}
-                                onClick={() => setActiveTab(tab)}
+                                onClick={() => handleTabChange(tab)}
                                 className={`flex items-center justify-center w-full h-10 rounded-xl cursor-pointer 
                                     ${activeTab === tab ? 'bg-gray-600 text-gray-200' : 'hover:bg-gray-600 hover:text-gray-200'}`}
                             >
                                 <p className={'text-left px-2 w-full'}>
                                     {tab === 'players' ? 'Пользователи' :
-                                        tab === 'appStats' ? 'Статистика по приложению' :
-                                            tab === 'playerStats' ? 'Общая статистика по пользователю' :
-                                                'Сессионная статистика по пользователю'}
+                                        tab === 'appStats' ? 'Статистика по приложению' : null}
                                 </p>
                             </div>
                         ))}
