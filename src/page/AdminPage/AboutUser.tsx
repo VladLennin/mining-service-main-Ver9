@@ -232,8 +232,8 @@ const AboutUser = () => {
                             <tr key={index} className={'border'}>
                                 {/*<td className="py-2 px-3">{data.title}</td>*/}
                                 <td className="py-2 px-3">{booster.type}</td>
-                                <td className="py-2 px-3">{booster.totalBought}</td>
-                                <td className="py-2 px-3">{booster.totalActivated}</td>
+                                <td className="py-2 px-3">{booster.totalBought || 0}</td>
+                                <td className="py-2 px-3">{booster.totalActivated ||0}</td>
                             </tr>
                         ))}
                         </tbody>

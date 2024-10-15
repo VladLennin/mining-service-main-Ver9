@@ -183,7 +183,7 @@ const UsersPage = () => {
                                 <td className="px-2 py-1 border text-xs font-semibold">{user.balance || '-'}</td>
                                 <td className="px-2 py-1 border text-xs font-semibold">{user.earned || '-'}</td>
                                 <td className="px-2 py-1 border text-xs ">{user.createdAt ? getCorrectDate(new Date(user.createdAt)) : '-'}</td>
-                                <td className="px-2 py-1 border text-xs hover:underline hover:cursor-pointer">{user.invitedBy || '-'}</td>
+                                <td className="px-2 py-1 border text-xs hover:underline hover:cursor-pointer" onClick={()=>handleAboutUser(user.invitedBy)}>{user.invitedBy || '-'}</td>
                                 <td className="px-2 py-1 border text-xs">{user.energy || '-'}</td>
                                 <td className="px-2 py-1 border text-xs">{user.diamondsBalance || '-'}</td>
                                 <td className="px-2 py-1 border text-xs">{user.lastEnergyUpdate ? getCorrectDate(new Date(user.lastEnergyUpdate)) : '-'}</td>
