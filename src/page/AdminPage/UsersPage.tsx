@@ -145,6 +145,10 @@ const UsersPage = () => {
         }
     };
 
+    const handleAboutUser = (id:number) =>{
+        navigate(`/admin/users/${id}`);
+    }
+
     return (
         <div className={'w-full h-full'}>
             <h2 className="text-2xl pb-2">Пользователи</h2>
@@ -170,7 +174,7 @@ const UsersPage = () => {
                         {data.map((user: any, index: number) => (
                             <tr key={index}
                                 className="text-gray-700 hover:bg-gray-200 text-center">
-                                <td className="px-2 py-1 border text-xs hover:underline hover:cursor-pointer">{user.id || '-'}</td>
+                                <td className="px-2 py-1 border text-xs hover:underline hover:cursor-pointer" onClick={()=>handleAboutUser(user.id)}>{user.id || '-'}</td>
                                 <td className="px-2 py-1 border text-xs">{user.username || '-'}</td>
                                 <td className="px-2 py-1 border text-xs">{user.first_name || '-'}</td>
                                 <td className="px-2 py-1 border text-xs">{user.last_name || '-'}</td>

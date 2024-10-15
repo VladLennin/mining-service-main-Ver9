@@ -1,4 +1,4 @@
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import Main from "./Main/Main";
 import BuyDiamondsPage from "./BuyDiamondsPage/BuyDiamondsPage";
 import AdminLoginPage from "./AdminPage/AdminLoginPage";
@@ -6,6 +6,7 @@ import PrivateRoute from "../app/routes/PrivateRouter";
 import AdminLayout from "./AdminPage/AdminLayout";
 import AppStats from "./AdminPage/AppStats";
 import UsersPage from "./AdminPage/UsersPage";
+import AboutUser from "./AdminPage/AboutUser";
 
 const Routing = () => {
     return (
@@ -16,8 +17,10 @@ const Routing = () => {
             <Route path={'/admin/login'} element={<AdminLoginPage/>}/>
             <Route element={<PrivateRoute/>}>
                 <Route element={<AdminLayout/>}>
+                    <Route path={'/admin'} element={<Navigate to="/admin/appStats" />} />
                     <Route path={'/admin/appStats'} element={<AppStats/>}/>
                     <Route path={'/admin/users'} element={<UsersPage/>}/>
+                    <Route path={'/admin/users/:id'} element={<AboutUser/>}/>
                 </Route>
             </Route>
         </Routes>
