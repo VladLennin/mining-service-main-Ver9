@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 
 interface BoosterStatistic {
+    title: string;
     type: string;
     totalBought: number | string; // может быть числом или строкой
     totalActivated: number | string; // может быть числом или строкой
@@ -18,8 +19,8 @@ const TableReact = ({boosterStatistics}) => {
         keyword = keyword.toLowerCase();
         setSearchValue(keyword);
         if (keyword) {
-            const results = boosterStatistics.filter((product: { type: string; }) =>
-                product.type.toLowerCase().includes(keyword)
+            const results = boosterStatistics.filter((product: { type: string , title:string;}) =>
+                product.type.toLowerCase().includes(keyword) || product.title.toLowerCase().includes(keyword)
             );
             setProductList(results);
             setRowsToShow(results.slice(0, rowsLimit));
@@ -60,12 +61,12 @@ const TableReact = ({boosterStatistics}) => {
     }, [productList, rowsLimit]);
 
     return (
-            <div className="w-full ">
+            <div className="w-full lg:text-base text-sm">
                 <div className="flex justify-end bg-gray-200 px-2 mt-2 py-2 border-b-0 border-black h-[50px] rounded-t-xl">
                     <input
                         type="text"
-                        className="w-[200px] text-sm bg-white border border-transparent rounded-lg px-2 placeholder:text-black text-black"
-                        placeholder="Поиск по слову.."
+                        className="w-full text-sm bg-white border border-transparent rounded-lg px-2 placeholder:text-black text-black"
+                        placeholder="Поиск по названию.."
                         onChange={(e) => searchProducts(e.target.value)}
                         value={searchValue}
                     />
@@ -74,6 +75,7 @@ const TableReact = ({boosterStatistics}) => {
                     <table className="table-auto w-full text-left border">
                         <thead>
                         <tr className="bg-gray-300 border">
+                            <th className="py-3 px-3">Название</th>
                             <th className="py-3 px-3">Тип</th>
                             <th className="py-3 px-3">Всего куплено</th>
                             <th className="py-3 px-3">Всего активировано</th>
@@ -82,6 +84,7 @@ const TableReact = ({boosterStatistics}) => {
                         <tbody>
                         {rowsToShow.map((data, index) => (
                             <tr key={index} className={index % 2 === 0 ? "bg-white" : "bg-gray-100"}>
+                                <td className="py-2 px-3">{data.title}</td>
                                 <td className="py-2 px-3">{data.type}</td>
                                 <td className="py-2 px-3">{data.totalBought}</td>
                                 <td className="py-2 px-3">{data.totalActivated}</td>

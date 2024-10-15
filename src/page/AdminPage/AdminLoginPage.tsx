@@ -18,7 +18,7 @@ const AdminLoginPage = () => {
             if (response.ok) {
                 const data = await response.json();
                 localStorage.setItem('token', data.token);
-                navigate('/admin')
+                navigate('/admin/appStats')
             } else {
                 const errorData = await response.json();
                 alert(errorData.message || 'Sign in failed');

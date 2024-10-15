@@ -5,7 +5,7 @@ import HowToMineBlock from "../../widget/HowToMineBlock";
 
 const Main = () => {
   return (
-    <div>
+    <div style={{overflow:'hidden'}}>
       {/* <button onClick={SoundService.makeSound}>play</button> */}
       <HomeCentalBlock />
 
