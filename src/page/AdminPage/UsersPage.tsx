@@ -10,14 +10,14 @@ const UsersPage = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [page, setPage] = useState(1);
-    const [limit, setLimit] = useState(5);
+    const [limit, setLimit] = useState(10);
     const [totalPages, setTotalPages] = useState(0);
     const [pageNumbers, setPageNumbers] = useState<number[]>([]);
     const navigate = useNavigate();
-    const debounceTimeout = useRef<NodeJS.Timeout | null>(null);
+    const searchTimeout = useRef<NodeJS.Timeout | null>(null);
 
     const fetchData = async (page: number, limit: number, searchValue: string) => {
-        setLoading(true);
+        // setLoading(true);
         setError(null);
         try {
             const token = localStorage.getItem('token');
@@ -40,38 +40,33 @@ const UsersPage = () => {
             // @ts-ignore
             setError(err.message);
         } finally {
-            setLoading(false);
+            // setLoading(false);
         }
     };
 
     const updatePageNumbers = (total: number, current: number) => {
         const numbers = [];
-        const maxDisplay = 5;
+        const maxDisplay = 8;
 
-        const startPage = Math.max(1, current - Math.floor(maxDisplay / 2));
-        const endPage = Math.min(total, startPage + maxDisplay - 1);
+        // Добавляем первую страницу
+        if (total > 0) numbers.push(1);
+
+        const startPage = Math.max(2, current - Math.floor(maxDisplay / 2));
+        const endPage = Math.min(total - 1, startPage + maxDisplay - 3); // Уменьшаем диапазон для оставшегося места
 
         for (let i = startPage; i <= endPage; i++) {
             numbers.push(i);
         }
+
+        // Добавляем последнюю страницу, если она не отображается
+        if (total > 1) numbers.push(total);
+
         setPageNumbers(numbers);
     };
 
     useEffect(() => {
         checkTokenExpiry(navigate);
-        if (debounceTimeout.current) {
-            clearTimeout(debounceTimeout.current); // Clear previous timeout
-        }
-
-        debounceTimeout.current = setTimeout(() => {
-            fetchData(page, limit, searchTerm); // Fetch data after delay
-        }, 300); // Adjust delay as needed
-
-        return () => {
-            if (debounceTimeout.current) {
-                clearTimeout(debounceTimeout.current); // Cleanup on unmount
-            }
-        };
+        fetchData(page, limit, searchTerm); // Fetch data after delay
     }, [page, limit, searchTerm]);
 
     useEffect(() => {
@@ -106,6 +101,21 @@ const UsersPage = () => {
         setPage(1); // Reset to first page on limit change
     };
 
+
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(e.target.value);
+        setPage(1); // Сбросить на первую страницу при изменении поиска
+
+        // Очистить предыдущий таймер
+        if (searchTimeout.current) {
+            clearTimeout(searchTimeout.current);
+        }
+
+        // Установить новый таймер для обновления данных
+        searchTimeout.current = setTimeout(() => {
+            fetchData(1, limit, e.target.value);
+        }, 100); // Вызов API с небольшой задержкой, чтобы избежать частых запросов
+    };
     const formatDate = new Intl.DateTimeFormat("ru", {
         day: "2-digit",
         month: "short",
@@ -157,7 +167,7 @@ const UsersPage = () => {
                     type="text"
                     placeholder="Поиск по никнейму, имени или фамилии"
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={handleSearchChange}
                     className="p-2 m-2 border rounded lg:w-96 w-[378px]"
                 />
 
@@ -212,7 +222,9 @@ const UsersPage = () => {
                     {data.map((user: any, index: number) => (
                         <div key={index}
                              className="border bg-gray-300 rounded-lg p-4 hover:shadow-lg transition-shadow text-sm">
-                            <h3 className="flex font-semibold text-lg justify-between">{user.username || 'Не указано'} <p onClick={() => handleAboutUser(user.id)} className={'underline'}>{user.id || 'Не указано'}</p></h3>
+                            <h3 className="flex font-semibold text-lg justify-between">{user.username || 'Не указано'}
+                                <p onClick={() => handleAboutUser(user.id)}
+                                   className={'underline'}>{user.id || 'Не указано'}</p></h3>
                             <p><strong>Имя:</strong> {user.first_name || '-'}</p>
                             <p><strong>Фамилия:</strong> {user.last_name || '-'}</p>
                             <p><strong>Страна:</strong> {user.language_code || '-'}</p>
@@ -222,7 +234,8 @@ const UsersPage = () => {
                             <p>
                                 <strong>Создан:</strong> {user.createdAt ? getCorrectDate(new Date(user.createdAt)) : '-'}
                             </p>
-                            <p className={''}  onClick={() => handleAboutUser(user.invitedBy)}><strong>Приглашен:</strong> <i className={'underline'}>{user.invitedBy || '-'}</i></p>
+                            <p className={''} onClick={() => handleAboutUser(user.invitedBy)}>
+                                <strong>Приглашен:</strong> <i className={'underline'}>{user.invitedBy || '-'}</i></p>
                             <p><strong>Энергия:</strong> {user.energy || '-'}</p>
                             <p><strong>Диаманты:</strong> {user.diamondsBalance || '-'}</p>
                             <p><strong>Последнее обновление
@@ -251,9 +264,10 @@ const UsersPage = () => {
                     <div>
                         <label htmlFor="limit-select" className="m-2">Записей на страницу:</label>
                         <select id="limit-select" value={limit} onChange={handleLimitChange} className="m-2">
-                            <option value={2}>2</option>
                             <option value={5}>5</option>
                             <option value={10}>10</option>
+                            <option value={25}>25</option>
+                            <option value={50}>50</option>
                         </select>
                     </div>
                     <div className={'flex'}>
