@@ -7,6 +7,7 @@ import AdminLayout from "./AdminPage/AdminLayout";
 import AppStats from "./AdminPage/AppStats";
 import UsersPage from "./AdminPage/UsersPage";
 import AboutUser from "./AdminPage/AboutUser";
+import ToolsPage from "./AdminPage/ToolsPage";
 
 const Routing = () => {
     return (
@@ -19,6 +20,7 @@ const Routing = () => {
                 <Route element={<AdminLayout/>}>
                     <Route path={'/admin'} element={<Navigate to="/admin/appStats" />} />
                     <Route path={'/admin/appStats'} element={<AppStats/>}/>
+                    <Route path={'/admin/tools'} element={<ToolsPage/>}/>
                     <Route path={'/admin/users'} element={<UsersPage/>}/>
                     <Route path={'/admin/users/:id'} element={<AboutUser/>}/>
                 </Route>

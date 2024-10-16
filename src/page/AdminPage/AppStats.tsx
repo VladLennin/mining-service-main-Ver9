@@ -192,7 +192,7 @@ const AppStats = () => {
 
     return (
         <div className={'flex flex-col w-full'}>
-            <h2 className="text-2xl">Статистика по приложению | Онлайн: {activeUsers}</h2>
+            <h2 className="text-2xl lg:flex justify-between">Статистика по приложению <p>Онлайн: {activeUsers} <span className={'w-2 h-2 text-green-500'}>&#9679;</span></p> </h2>
             <div className={'h-2/6'}>
                 <div className="grid grid-cols-2 gap-4 lg:mt-4 lg:my-0 my-4 lg:text-base text-sm">
                     <div className="bg-gray-100 p-4 rounded-md shadow ">

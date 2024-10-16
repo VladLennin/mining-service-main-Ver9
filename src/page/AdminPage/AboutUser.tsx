@@ -3,8 +3,14 @@ import {useParams} from "react-router-dom";
 import {PulseLoader} from "react-spinners";
 import {User} from "../../entity/user/model/types";
 
+import GreenCoin from "../../assets/coins/green.png";
+import BlackCoin from "../../assets/coins/black.png";
+import YellowCoin from "../../assets/coins/yellow.png";
+import RedCoin from "../../assets/coins/red.png";
+import WhiteCoin from "../../assets/coins/standart.png";
+
 interface BoosterStatistic {
-    // title: string;
+    title: string;
     type: string;
     totalBought: number | string;
     totalActivated: number | string;
@@ -46,12 +52,16 @@ interface GameSession {
     totalDuration: number | string;
 }
 
-interface UserStats {
-    amountOfEnters: number,
-    boosters: BoosterStatistic[],
+interface RefStats {
     earnedWithRef: number,
     refCount: number,
     refSpent: number,
+}
+
+interface UserStats {
+    amountOfEnters: number,
+    boosters: BoosterStatistic[],
+    refStats: RefStats,
     timeInGame: number,
     totalEarned: number,
     transactionStats: TransactionStats,
@@ -140,6 +150,31 @@ const AboutUser = () => {
         );
     }
 
+    const formatTimeInGame = (milliseconds: number) => {
+        const totalMinutes = Math.floor(milliseconds / 60000);
+        const days = Math.floor(totalMinutes / 1440);
+        const hours = Math.floor((totalMinutes % 1440) / 60);
+        const minutes = totalMinutes % 60;
+
+        return `${days} дн. ${hours} ч. ${minutes} мин.`;
+    };
+
+    const formatTimeInSession = (milliseconds: number) => {
+        const totalMinutes = Math.floor(milliseconds / 60000);
+        const minutes = totalMinutes % 60;
+
+        return `${minutes} мин.`;
+    }
+
+    const formatTimeInSessionHours = (milliseconds: number) => {
+        const totalMinutes = Math.floor(milliseconds / 60000);
+        const hours = Math.floor((totalMinutes % 1440) / 60);
+        const minutes = totalMinutes % 60;
+
+        return `${hours} ч. ${minutes} мин.`;
+    }
+
+
     return (
         <div className={'flex flex-col w-full'}>
             <h2 className="text-2xl pb-2 lg:text-left text-center">Информация о пользователе: <b
@@ -147,71 +182,111 @@ const AboutUser = () => {
             <hr/>
             <p className={'text-base py-4 text-center font-bold'}>{'>> '}Общая информация{' <<'}</p>
             <div className={'flex lg:flex-row flex-col justify-between items-center w-full gap-4'}>
-                <div className={'flex lg:w-1/4 w-full flex-col bg-gray-100 p-4 rounded-md shadow '}>
+                <div
+                    className={'flex lg:w-1/4 w-full flex-col justify-center bg-gray-100 p-4 rounded-md shadow lg:h-24'}>
                     <p><strong>Имя:</strong> {allStats.user.first_name || "Не указано"}</p>
                     <p><strong>Фамилия:</strong> {allStats.user.last_name || "Не указано"}</p>
                     <p><strong>Язык:</strong> {allStats.user.language_code || "Не указано"}</p>
                 </div>
-                <div className={'flex lg:w-1/4 w-full flex-col bg-gray-100 p-4 rounded-md shadow  '}>
+                <div
+                    className={'flex lg:w-1/4 w-full flex-col justify-center bg-gray-100 p-4 rounded-md shadow lg:h-24'}>
                     <p><strong>Баланс:</strong> {allStats.user.balance || 0}</p>
                     <p><strong>Баланс алмазов:</strong> {allStats.user.diamondsBalance || 0}</p>
-                    <p><strong>Всего заработано:</strong> {allStats.totalEarned ||0 }</p>
+                    <p><strong>Всего заработано:</strong> {allStats.totalEarned || 0}</p>
                 </div>
-                <div className={'flex lg:w-1/4 w-full flex-col bg-gray-100 p-4 rounded-md shadow '}>
-                    <p><strong>Времени в игре:</strong> {allStats.timeInGame || 0}</p>
+                <div
+                    className={'flex lg:w-1/4 w-full flex-col justify-center bg-gray-100 p-4 rounded-md shadow lg:h-24'}>
+                    <p><strong>Времени в игре:</strong> {formatTimeInGame(allStats.timeInGame) || 0}</p>
                     <p><strong>Энергия:</strong> {allStats.user.energy || 0}</p>
                     <p><strong>Создан:</strong> {getCorrectDate(new Date(allStats.user.createdAt)) || "Не указано"}</p>
                 </div>
-                <div className={'flex lg:w-1/4 w-full flex-col bg-gray-100 p-4 rounded-md shadow '}>
-                    <p><strong>Последний логин:</strong> {getCorrectDate(new Date(allStats.user.lastLogin)) || "Не указано"}</p>
+                <div
+                    className={'flex lg:w-1/4 w-full flex-col justify-center bg-gray-100 p-4 rounded-md shadow lg:h-24'}>
+                    <p><strong>Последний
+                        логин:</strong> {getCorrectDate(new Date(allStats.user.lastLogin)) || "Не указано"}</p>
                     <p><strong>Дней подряд:</strong> {allStats.user.consecutiveDays || 0}</p>
                 </div>
 
+            </div>
+            <p className={'text-base py-4 text-center font-bold'}>{'>> '}Информация по реферальной системе{' <<'}</p>
+            <div className={'flex lg:flex-row flex-col gap-4'}>
+                <div className={'flex lg:w-1/3 w-full flex-col bg-gray-100 p-4 rounded-md shadow '}>
+                    <p><strong>Сколько заработано с рефералов:</strong> {allStats.refStats.earnedWithRef || 0}</p>
+                </div>
+                <div className={'flex lg:w-1/3 w-full flex-col bg-gray-100 p-4 rounded-md shadow '}>
+                    <p><strong>Количество рефералов:</strong> {allStats.refStats.refCount || 0}</p>
+                </div>
+                <div className={'flex lg:w-1/3 w-full flex-col bg-gray-100 p-4 rounded-md shadow '}>
+                    <p><strong>Сколько ТОН потратил реферал:</strong> {allStats.refStats.refSpent || 0}</p>
+                </div>
             </div>
 
             <p className={'text-base py-4 text-center font-bold'}>{'>> '}Сессийная информация{' <<'}</p>
             <div className={'flex lg:flex-row flex-col justify-between items-center w-full gap-4'}>
                 <div className={'flex lg:w-1/3 w-full flex-col bg-gray-100 p-4 rounded-md shadow '}>
-                    <p><strong>Средняя длительность сессии:</strong> {sessionStats.averageDuration}</p>
+                    <p><strong>Средняя длительность
+                        сессии:</strong> {formatTimeInSession(Number(sessionStats.averageDuration)) || 0}</p>
                 </div>
                 <div className={'flex lg:w-1/3 w-full flex-col bg-gray-100 p-4 rounded-md shadow '}>
-                    <p><strong>Сума длительности всех сессий:</strong> {sessionStats.totalDuration}</p>
+                    <p><strong>Сума длительности всех
+                        сессий:</strong> {formatTimeInSessionHours(Number(sessionStats.totalDuration)) || 0}</p>
                 </div>
                 <div className={'flex lg:w-1/3 w-full flex-col bg-gray-100 p-4 rounded-md shadow '}>
-                    <p><strong>Среднее заработаных монет за сессию:</strong> {sessionStats.earned.totalEarned}</p>
+                    <p><strong>Среднее заработаных монет за сессию:</strong> {sessionStats.earned.totalEarned || 0}</p>
                 </div>
             </div>
             <div className={'flex lg:flex-row flex-col lg:gap-4'}>
                 <div className={'lg:w-1/2 flex items-center justify-between bg-gray-100 p-4 rounded-md shadow mt-4'}>
-                    <p><strong>Всего монет:</strong></p>
+                    <p className={'w-1/3'}><strong>Всего монет:</strong></p>
 
-                    <div className={'lg:flex grid grid-cols-2 gap-4'}>
+                    <div className={'lg:flex grid grid-cols-2 gap-4 w-2/3 justify-center'}>
                         <p className={'flex flex-col items-center'}>
-                            <strong>Черные:</strong> {sessionStats.totalCoins.totalBlack}</p>
+                            <img className={'w-10 h-10'} src={BlackCoin} alt={'Черные:'}/>
+                            {sessionStats.totalCoins.totalBlack || 0}
+                        </p>
                         <p className={'flex flex-col items-center'}>
-                            <strong>Жёлтые:</strong> {sessionStats.totalCoins.totalYellow}</p>
+                            <img className={'w-10 h-10'} src={YellowCoin} alt={'Желтые:'}/>
+                            {sessionStats.totalCoins.totalYellow || 0}
+                        </p>
                         <p className={'flex flex-col items-center'}>
-                            <strong>Красные:</strong> {sessionStats.totalCoins.totalRed}</p>
+                            <img className={'w-10 h-10'} src={RedCoin} alt={'Красные:'}/>
+                            {sessionStats.totalCoins.totalRed || 0}
+                        </p>
                         <p className={'flex flex-col items-center'}>
-                            <strong>Зеленые:</strong> {sessionStats.totalCoins.totalGreen}</p>
+                            <img className={'w-10 h-10'} src={GreenCoin} alt={'Зелёные:'}/>
+                            {sessionStats.totalCoins.totalGreen || 0}
+                        </p>
                         <p className={'flex flex-col items-center'}>
-                            <strong>Белые:</strong> {sessionStats.totalCoins.totalWhite}</p>
+                            <img className={'w-10 h-10'} src={WhiteCoin} alt={'Белые:'}/>
+                            {sessionStats.totalCoins.totalWhite || 0}
+                        </p>
                     </div>
                 </div>
 
                 <div className={'lg:w-1/2 flex items-center justify-between bg-gray-100 p-4 rounded-md shadow mt-4'}>
-                    <p><strong>Средне словлено <br className={'lg:hidden'}/>монет за сессию:</strong></p>
-                    <div className={'lg:flex grid grid-cols-2 gap-4'}>
+                    <p className={'w-1/3'}><strong>Средне словлено <br className={'lg:hidden'}/>монет за
+                        сессию:</strong></p>
+                    <div className={'lg:flex grid grid-cols-2 gap-4 w-2/3 justify-center'}>
                         <p className={'flex flex-col items-center'}>
-                            <strong>Черные:</strong> {sessionStats.averageCoins.averageBlack}</p>
+                            <img className={'w-10 h-10'} src={BlackCoin} alt={'Черные:'}/>
+                            {sessionStats.averageCoins.averageBlack || 0}
+                        </p>
                         <p className={'flex flex-col items-center'}>
-                            <strong>Жёлтые:</strong> {sessionStats.averageCoins.averageYellow}</p>
+                            <img className={'w-10 h-10'} src={YellowCoin} alt={'Желтые:'}/>
+                            {sessionStats.averageCoins.averageYellow || 0}
+                        </p>
                         <p className={'flex flex-col items-center'}>
-                            <strong>Красные:</strong> {sessionStats.averageCoins.averageRed}</p>
+                            <img className={'w-10 h-10'} src={RedCoin} alt={'Красные:'}/>
+                            {sessionStats.averageCoins.averageRed || 0}
+                        </p>
                         <p className={'flex flex-col items-center'}>
-                            <strong>Зеленые:</strong> {sessionStats.averageCoins.averageGreen}</p>
+                            <img className={'w-10 h-10'} src={GreenCoin} alt={'Зелёные:'}/>
+                            {sessionStats.averageCoins.averageGreen || 0}
+                        </p>
                         <p className={'flex flex-col items-center'}>
-                            <strong>Белые:</strong> {sessionStats.averageCoins.averageWhite}</p>
+                            <img className={'w-10 h-10'} src={WhiteCoin} alt={'Белые:'}/>
+                            {sessionStats.averageCoins.averageWhite || 0}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -221,7 +296,7 @@ const AboutUser = () => {
                     <table className="table-auto w-full text-center bg-gray-100 p-4 rounded-md shadow ">
                         <thead>
                         <tr>
-                            {/*<th className="py-3 px-3">Название</th>*/}
+                            <th className="py-3 px-3">Название</th>
                             <th className="py-3 px-3">Тип</th>
                             <th className="py-3 px-3">Всего куплено</th>
                             <th className="py-3 px-3">Всего активировано</th>
@@ -230,10 +305,10 @@ const AboutUser = () => {
                         <tbody>
                         {allStats.boosters.map((booster, index) => (
                             <tr key={index} className={'border'}>
-                                {/*<td className="py-2 px-3">{data.title}</td>*/}
+                                <td className="py-2 px-3">{booster.title}</td>
                                 <td className="py-2 px-3">{booster.type}</td>
                                 <td className="py-2 px-3">{booster.totalBought || 0}</td>
-                                <td className="py-2 px-3">{booster.totalActivated ||0}</td>
+                                <td className="py-2 px-3">{booster.totalActivated || 0}</td>
                             </tr>
                         ))}
                         </tbody>
@@ -243,7 +318,8 @@ const AboutUser = () => {
                     <p className={'text-center font-bold py-4'}>{'>> '}Транзакции{' <<'}</p>
                     <div className={'grid grid-cols-2 gap-4'}>
                         <div className={'flex flex-col items-center justify-center bg-gray-100 p-4 rounded-md shadow'}>
-                            <p><strong>Количество успешных:</strong> {allStats.transactionStats.successfulCount || 0}</p>
+                            <p><strong>Количество успешных:</strong> {allStats.transactionStats.successfulCount || 0}
+                            </p>
                         </div>
                         <div className={'flex flex-col items-center justify-center bg-gray-100 p-4 rounded-md shadow'}>
                             <p><strong>Количество неудавшихся:</strong> {allStats.transactionStats.failedCount || 0}</p>
@@ -253,7 +329,7 @@ const AboutUser = () => {
 
                         </div>
                         <div className={'flex flex-col items-center justify-center bg-gray-100 p-4 rounded-md shadow'}>
-                            <p><strong>Среднее успешных:</strong> {allStats.transactionStats.successfulAverage ||0}</p>
+                            <p><strong>Среднее успешных:</strong> {allStats.transactionStats.successfulAverage || 0}</p>
                         </div>
                     </div>
                 </div>

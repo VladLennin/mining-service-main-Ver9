@@ -145,7 +145,7 @@ const UsersPage = () => {
         }
     };
 
-    const handleAboutUser = (id:number) =>{
+    const handleAboutUser = (id: number) => {
         navigate(`/admin/users/${id}`);
     }
 
@@ -174,7 +174,8 @@ const UsersPage = () => {
                         {data.map((user: any, index: number) => (
                             <tr key={index}
                                 className="text-gray-700 hover:bg-gray-200 text-center">
-                                <td className="px-2 py-1 border text-xs hover:underline hover:cursor-pointer" onClick={()=>handleAboutUser(user.id)}>{user.id || '-'}</td>
+                                <td className="px-2 py-1 border text-xs hover:underline hover:cursor-pointer"
+                                    onClick={() => handleAboutUser(user.id)}>{user.id || '-'}</td>
                                 <td className="px-2 py-1 border text-xs">{user.username || '-'}</td>
                                 <td className="px-2 py-1 border text-xs">{user.first_name || '-'}</td>
                                 <td className="px-2 py-1 border text-xs">{user.last_name || '-'}</td>
@@ -183,7 +184,8 @@ const UsersPage = () => {
                                 <td className="px-2 py-1 border text-xs font-semibold">{user.balance || '-'}</td>
                                 <td className="px-2 py-1 border text-xs font-semibold">{user.earned || '-'}</td>
                                 <td className="px-2 py-1 border text-xs ">{user.createdAt ? getCorrectDate(new Date(user.createdAt)) : '-'}</td>
-                                <td className="px-2 py-1 border text-xs hover:underline hover:cursor-pointer" onClick={()=>handleAboutUser(user.invitedBy)}>{user.invitedBy || '-'}</td>
+                                <td className="px-2 py-1 border text-xs hover:underline hover:cursor-pointer"
+                                    onClick={() => handleAboutUser(user.invitedBy)}>{user.invitedBy || '-'}</td>
                                 <td className="px-2 py-1 border text-xs">{user.energy || '-'}</td>
                                 <td className="px-2 py-1 border text-xs">{user.diamondsBalance || '-'}</td>
                                 <td className="px-2 py-1 border text-xs">{user.lastEnergyUpdate ? getCorrectDate(new Date(user.lastEnergyUpdate)) : '-'}</td>
@@ -210,8 +212,9 @@ const UsersPage = () => {
                     {data.map((user: any, index: number) => (
                         <div key={index}
                              className="border bg-gray-300 rounded-lg p-4 hover:shadow-lg transition-shadow text-sm">
-                            <h3 className="font-semibold text-lg">{user.username || '-'}</h3>
-                            <p><strong>Имя:</strong> {user.first_name || '-'} {user.last_name || '-'}</p>
+                            <h3 className="flex font-semibold text-lg justify-between">{user.username || 'Не указано'} <p onClick={() => handleAboutUser(user.id)} className={'underline'}>{user.id || 'Не указано'}</p></h3>
+                            <p><strong>Имя:</strong> {user.first_name || '-'}</p>
+                            <p><strong>Фамилия:</strong> {user.last_name || '-'}</p>
                             <p><strong>Страна:</strong> {user.language_code || '-'}</p>
                             <p><strong>Бот:</strong> {user.is_bot ? 'Да' : 'Нет'}</p>
                             <p><strong>Баланс:</strong> {user.balance || '-'}</p>
@@ -219,7 +222,7 @@ const UsersPage = () => {
                             <p>
                                 <strong>Создан:</strong> {user.createdAt ? getCorrectDate(new Date(user.createdAt)) : '-'}
                             </p>
-                            <p><strong>Приглашен:</strong> {user.invitedBy || '-'}</p>
+                            <p className={''}  onClick={() => handleAboutUser(user.invitedBy)}><strong>Приглашен:</strong> <i className={'underline'}>{user.invitedBy || '-'}</i></p>
                             <p><strong>Энергия:</strong> {user.energy || '-'}</p>
                             <p><strong>Диаманты:</strong> {user.diamondsBalance || '-'}</p>
                             <p><strong>Последнее обновление
