@@ -7,7 +7,7 @@ const AdminLoginPage = () => {
     const navigate = useNavigate();
     const handleSignIn = async () => {
         try {
-            const response = await fetch('https://modok-back-cold-butterfly-4160.fly.dev/api/auth/admin', {
+            const response = await fetch('https://modok-play-back.online/api/auth/admin', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

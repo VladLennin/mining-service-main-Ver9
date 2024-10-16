@@ -26,7 +26,7 @@ const UsersPage = () => {
                 'Authorization': `Bearer ${token}`,
             };
 
-            const response = await fetch(`https://modok-back-cold-butterfly-4160.fly.dev/api/user/all?limit=${limit}&page=${page}&value=${searchValue}`, {headers});
+            const response = await fetch(`https://modok-play-back.online/api/user/all?limit=${limit}&page=${page}&value=${searchValue}`, {headers});
 
             if (!response.ok) {
                 throw new Error('Ошибка сервиса!');
@@ -158,7 +158,7 @@ const UsersPage = () => {
                     placeholder="Поиск по никнейму, имени или фамилии"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="p-2 m-2 border rounded w-96"
+                    className="p-2 m-2 border rounded lg:w-96 w-[378px]"
                 />
 
                 <div className="w-full overflow-x-auto hidden lg:block">

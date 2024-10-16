@@ -85,11 +85,11 @@ const AboutUser = () => {
                     'Authorization': `Bearer ${token}`,
                 };
 
-                const sessionResponse = await fetch(`https://modok-back-cold-butterfly-4160.fly.dev/api/statistic/game-session?userId=${id}`, {headers});
+                const sessionResponse = await fetch(`https://modok-play-back.online/api/statistic/game-session?userId=${id}`, {headers});
                 const sessionData = await sessionResponse.json();
                 setSessionStats(sessionData);
 
-                const userResponse = await fetch(`https://modok-back-cold-butterfly-4160.fly.dev/api/statistic/user?userId=${id}`, {headers});
+                const userResponse = await fetch(`https://modok-play-back.online/api/statistic/user?userId=${id}`, {headers});
                 const userData = await userResponse.json();
                 setAllStats(userData);
             } catch (error) {

@@ -71,7 +71,7 @@ const AppStats = () => {
                 'Authorization': `Bearer ${token}`,
             };
 
-            response = await fetch('https://modok-back-cold-butterfly-4160.fly.dev/api/statistic/application', {headers});
+            response = await fetch('https://modok-play-back.online/api/statistic/application', {headers});
 
 
             if (!response.ok) {
@@ -92,7 +92,7 @@ const AppStats = () => {
         checkTokenExpiry(navigate)
         fetchData();
 
-        const ws = new WebSocket("wss://modok-back-cold-butterfly-4160.fly.dev/ws");
+        const ws = new WebSocket("wss://modok-play-back.online/ws");
 
         ws.onopen = () => {
             console.log("WebSocket connection established");
@@ -118,9 +118,33 @@ const AppStats = () => {
         };
     }, []);
 
+    // @ts-ignore
+    const getTopN = (dataArray, n) => {
+        // Sort the array based on count in descending order and take the top N items
+        return dataArray
+            // @ts-ignore
+            .sort((a, b) => b.count - a.count)
+            .slice(0, n);
+    };
+
+    // @ts-ignore
+    const calculatePercentages = (topItems) => {
+        // @ts-ignore
+        const total = topItems.reduce((acc, item) => acc + item.count, 0);
+        // @ts-ignore
+        return topItems.map(item => ({
+            ...item,
+            percentage: total > 0 ? ((item.count / total) * 100).toFixed(2) : '0.00',
+        }));
+    };
+
     const getLanguageDistributionData = (languageDistribution: LanguageDistribution[]) => {
-        const labels = languageDistribution.map(lang => lang.language_code);
-        const data = languageDistribution.map(lang => parseFloat(lang.percentage));
+        const topLanguages = getTopN(languageDistribution, 5);
+        const adjustedData = calculatePercentages(topLanguages);
+        // @ts-ignore
+        const labels = adjustedData.map(lang => lang.language_code);
+        // @ts-ignore
+        const data = adjustedData.map(lang => parseFloat(lang.percentage));
         return {
             labels,
             datasets: [
@@ -137,9 +161,14 @@ const AppStats = () => {
             ],
         };
     };
+
     const getOsDistributionData = (osDistribution: OsDistribution[]) => {
-        const labels = osDistribution.map(os => os.os || 'Не указано');
-        const data = osDistribution.map(os => parseFloat(os.percentage));
+        const topOs = getTopN(osDistribution, 5);
+        const adjustedData = calculatePercentages(topOs);
+        // @ts-ignore
+        const labels = adjustedData.map(os => os.os || 'Не указано');
+        // @ts-ignore
+        const data = adjustedData.map(os => parseFloat(os.percentage));
         return {
             labels,
             datasets: [
@@ -156,9 +185,14 @@ const AppStats = () => {
             ],
         };
     };
-    const getGoodDistributionData = (goodDistibution: GoodDistribution[]) => {
-        const labels = goodDistibution.map(good => good.good || 'Не указано');
-        const data = goodDistibution.map(good => parseFloat(good.percentage));
+
+    const getGoodDistributionData = (goodDistribution: GoodDistribution[]) => {
+        const topGoods = getTopN(goodDistribution, 5);
+        const adjustedData = calculatePercentages(topGoods);
+        // @ts-ignore
+        const labels = adjustedData.map(good => good.good || 'Не указано');
+        // @ts-ignore
+        const data = adjustedData.map(good => parseFloat(good.percentage));
         return {
             labels,
             datasets: [
