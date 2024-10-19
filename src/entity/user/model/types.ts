@@ -9,6 +9,7 @@ export type User = {
     earned: number;
     createdAt: number;
     invitedBy: number;
+    isBanned:boolean;
     updatedAt: Date;
     energy: number;
     lastEnergyUpdate: Date;

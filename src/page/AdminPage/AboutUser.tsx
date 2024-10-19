@@ -178,7 +178,8 @@ const AboutUser = () => {
     return (
         <div className={'flex flex-col w-full'}>
             <h2 className="text-2xl pb-2 lg:text-left text-center">Информация о пользователе: <b
-                className={'underline'}>{allStats.user.username}</b></h2>
+                className={'underline'}>{allStats.user.username}</b>
+                <span className="text-red-500 ml-2">{allStats.user.isBanned? '(В бане)':''} </span></h2>
             <hr/>
             <p className={'text-base py-4 text-center font-bold'}>{'>> '}Общая информация{' <<'}</p>
             <div className={'flex lg:flex-row flex-col justify-between items-center w-full gap-4'}>

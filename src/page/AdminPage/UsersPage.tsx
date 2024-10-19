@@ -7,7 +7,7 @@ import {User} from "../../entity/user/model/types";
 const UsersPage = () => {
     const [searchTerm, setSearchTerm] = useState("");
     const [data, setData] = useState<User[] | null>(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [page, setPage] = useState(1);
     const [limit, setLimit] = useState(10);
@@ -40,7 +40,7 @@ const UsersPage = () => {
             // @ts-ignore
             setError(err.message);
         } finally {
-            // setLoading(false);
+            setLoading(false);
         }
     };
 
@@ -162,20 +162,22 @@ const UsersPage = () => {
     return (
         <div className={'w-full h-full'}>
             <h2 className="text-2xl pb-2">Пользователи</h2>
-            <div className={'bg-gray-100 rounded-lg text-sm'}>
-                <input
-                    type="text"
-                    placeholder="Поиск по никнейму, имени или фамилии"
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                    className="p-2 m-2 border rounded lg:w-96 w-[378px]"
-                />
+            <div className={'bg-gray-100 rounded-lg text-sm w-full'}>
+                <div className={'flex w-full'}>
+                    <input
+                        type="text"
+                        placeholder="Поиск по никнейму, имени или фамилии"
+                        value={searchTerm}
+                        onChange={handleSearchChange}
+                        className="p-2 m-2 border rounded lg:w-96 w-full"
+                    />
+                </div>
 
                 <div className="w-full overflow-x-auto hidden lg:block">
                     <table className="min-w-full">
                         <thead>
                         <tr className="text-sm font-semibold tracking-wide text-center text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
-                            {['ID', 'Никнейм', 'Имя', 'Фамилия', 'Страна', 'Бот', 'Баланс', 'Заработано', 'Аккаунт создан', 'Приглашен', 'Энергия', 'Диаманты', 'Последнее обновление энергии', 'Награда', 'Реферальный бонус', 'Последний логин'].map((header, index) => (
+                            {['ID', 'Никнейм', 'Имя', 'Фамилия', 'Страна', 'Бот', 'Баланс', 'Заработано', 'Аккаунт создан', 'Приглашен', 'Энергия', 'Диаманты', 'Награда', 'Реферальный бонус', 'Последний логин'].map((header, index) => (
                                 <th key={index} className="px-2 py-1">{header}</th>
                             ))}
                         </tr>
@@ -198,7 +200,6 @@ const UsersPage = () => {
                                     onClick={() => handleAboutUser(user.invitedBy)}>{user.invitedBy || '-'}</td>
                                 <td className="px-2 py-1 border text-xs">{user.energy || '-'}</td>
                                 <td className="px-2 py-1 border text-xs">{user.diamondsBalance || '-'}</td>
-                                <td className="px-2 py-1 border text-xs">{user.lastEnergyUpdate ? getCorrectDate(new Date(user.lastEnergyUpdate)) : '-'}</td>
                                 <td className="px-2 py-1 border text-xs">
                         <span
                             className={`px-2 py-1 font-semibold leading-tight ${user.rewardCollected ? 'text-green-700 bg-green-100' : 'text-red-700 bg-red-100'} rounded-sm`}>
@@ -211,7 +212,7 @@ const UsersPage = () => {
                             {user.gotRefBonus ? 'Получен' : 'Нет'}
                         </span>
                                 </td>
-                                <td className="px-4 py-3 border text-xs">{user.lastLogin ? getCorrectDate(new Date(user.lastLogin)) : '-'}</td>
+                                <td className="px-4 py-3 border text-xs">{user.lastEnergyUpdate ? getCorrectDate(new Date(user.lastLogin)) : '-'}</td>
                             </tr>
                         ))}
                         </tbody>
@@ -238,9 +239,6 @@ const UsersPage = () => {
                                 <strong>Приглашен:</strong> <i className={'underline'}>{user.invitedBy || '-'}</i></p>
                             <p><strong>Энергия:</strong> {user.energy || '-'}</p>
                             <p><strong>Диаманты:</strong> {user.diamondsBalance || '-'}</p>
-                            <p><strong>Последнее обновление
-                                энергии:</strong> {user.lastEnergyUpdate ? getCorrectDate(new Date(user.lastEnergyUpdate)) : '-'}
-                            </p>
                             <p><strong>Награда:</strong>
                                 <span
                                     className={`px-2 font-semibold leading-tight ${user.rewardCollected ? 'text-green-700 bg-green-100' : 'text-red-700 bg-red-100'} rounded-sm`}>
@@ -254,13 +252,13 @@ const UsersPage = () => {
                 </span>
                             </p>
                             <p><strong>Последний
-                                логин:</strong> {user.lastLogin ? getCorrectDate(new Date(user.lastLogin)) : '-'}</p>
+                                логин:</strong> {user.lastLogin ? getCorrectDate(new Date(user.lastEnergyUpdate)) : '-'}</p>
                         </div>
                     ))}
                 </div>
 
 
-                <div className="flex flex-col lg:flex-row justify-between items-center p-2 gap-2">
+                <div className="flex flex-col lg:flex-row justify-between items-center p-2 gap-2 pr-4">
                     <div>
                         <label htmlFor="limit-select" className="m-2">Записей на страницу:</label>
                         <select id="limit-select" value={limit} onChange={handleLimitChange} className="m-2">
@@ -271,7 +269,7 @@ const UsersPage = () => {
                         </select>
                     </div>
                     <div className={'flex'}>
-                        <button disabled={page === 1} onClick={() => handlePageChange(page - 1)}>Предыдущая</button>
+                        <button disabled={page === 1} onClick={() => handlePageChange(page - 1)}>{"<"}</button>
                         <div className="flex items-center mx-2">
                             {pageNumbers.map((num) => (
                                 <button
@@ -283,7 +281,7 @@ const UsersPage = () => {
                                 </button>
                             ))}
                         </div>
-                        <button disabled={page === totalPages} onClick={() => handlePageChange(page + 1)}>Следующая
+                        <button disabled={page === totalPages} onClick={() => handlePageChange(page + 1)}>{'>'}
                         </button>
                     </div>
                 </div>
