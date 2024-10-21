@@ -8,6 +8,7 @@ import AppStats from "./AdminPage/AppStats";
 import UsersPage from "./AdminPage/UsersPage";
 import AboutUser from "./AdminPage/AboutUser";
 import ToolsPage from "./AdminPage/ToolsPage";
+import ProvidersPage from "./AdminPage/PromotersPage";
 
 const Routing = () => {
     return (
@@ -20,6 +21,7 @@ const Routing = () => {
                 <Route element={<AdminLayout/>}>
                     <Route path={'/admin'} element={<Navigate to="/admin/appStats" />} />
                     <Route path={'/admin/appStats'} element={<AppStats/>}/>
+                    <Route path={'/admin/promoters'} element={<ProvidersPage/>}/>
                     <Route path={'/admin/tools'} element={<ToolsPage/>}/>
                     <Route path={'/admin/users'} element={<UsersPage/>}/>
                     <Route path={'/admin/users/:id'} element={<AboutUser/>}/>
