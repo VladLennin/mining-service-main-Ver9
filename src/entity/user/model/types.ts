@@ -14,6 +14,7 @@ export type User = {
     energy: number;
     lastEnergyUpdate: Date;
     rewardCollected: boolean;
+    referralCount:number;
     consecutiveDays: number;
     lastLogin: Date;
     gotRefBonus: boolean;

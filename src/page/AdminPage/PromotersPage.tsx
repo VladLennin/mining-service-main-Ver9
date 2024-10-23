@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import PromoterStats from "./PromoterStats"; // Import the PromoterStats component
+import PromoterStats from "./PromoterStats";
+import {checkTokenExpiry} from "../../app/services/checkTokenExpire";
+import {useNavigate} from "react-router-dom"; // Import the PromoterStats component
 
 interface Promoter {
     id: number;
@@ -10,8 +12,10 @@ const PromotersPage = () => {
     const [promoters, setPromoters] = useState<Promoter[]>([]);
     const [activePromoterId, setActivePromoterId] = useState<number | null>(null);
     const token = localStorage.getItem('token');
+    const navigate = useNavigate();
 
     useEffect(() => {
+        checkTokenExpiry(navigate);
         const headers = {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
