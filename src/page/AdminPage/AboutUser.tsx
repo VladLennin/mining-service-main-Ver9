@@ -8,6 +8,7 @@ import BlackCoin from "../../assets/coins/black.png";
 import YellowCoin from "../../assets/coins/yellow.png";
 import RedCoin from "../../assets/coins/red.png";
 import WhiteCoin from "../../assets/coins/standart.png";
+import {all} from "axios";
 
 interface BoosterStatistic {
     title: string;
@@ -58,6 +59,19 @@ interface RefStats {
     refSpent: number,
 }
 
+interface Card {
+    id: number;
+    name: string;
+}
+
+interface CardStats {
+    Card: Card;
+    id: number;
+    level: number;
+    updatedAt: string;
+    upgradeCost: number;
+}
+
 interface UserStats {
     amountOfEnters: number,
     boosters: BoosterStatistic[],
@@ -66,6 +80,7 @@ interface UserStats {
     totalEarned: number,
     transactionStats: TransactionStats,
     user: User
+    cardStats: CardStats[];
 }
 
 
@@ -179,7 +194,7 @@ const AboutUser = () => {
         <div className={'flex flex-col w-full'}>
             <h2 className="text-2xl pb-2 lg:text-left text-center">Информация о пользователе: <b
                 className={'underline'}>{allStats.user.username}</b>
-                <span className="text-red-500 ml-2">{allStats.user.isBanned? '(В бане)':''} </span></h2>
+                <span className="text-red-500 ml-2">{allStats.user.isBanned ? '(В бане)' : ''} </span></h2>
             <hr/>
             <p className={'text-base py-4 text-center font-bold'}>{'>> '}Общая информация{' <<'}</p>
             <div className={'flex lg:flex-row flex-col justify-between items-center w-full gap-4'}>
@@ -335,7 +350,24 @@ const AboutUser = () => {
                     </div>
                 </div>
             </div>
-
+            {allStats.cardStats ? <><p className={'text-base py-4 text-center font-bold'}>{'>> '}Информация по
+                карточкам{' <<'}</p>
+                <div className={'grid grid-cols-2 gap-4'}>
+                    {allStats.cardStats.map((cardStat, index)=> (
+                            <div key={index} className={'flex items-center justify-center bg-gray-100 rounded-md shadow p-4'}>
+                                <div className={'w-1/3'}>
+                                    <p className={'text-center text-2xl'}>{cardStat.Card.name}</p>
+                                </div>
+                                <div className={'w-2/3 flex flex-col items-center justify-center gap-2'}>
+                                    <p><b>ID:</b> {cardStat.id}</p>
+                                    <p><b>Уровень:</b> {cardStat.level}</p>
+                                    <p><b>Стоимость улучшения:</b> {cardStat.upgradeCost}</p>
+                                    <p><b>Последнее улучшение:</b> {new Date(cardStat.updatedAt).toLocaleDateString()}</p>
+                                </div>
+                            </div>
+                        ))}
+                </div>
+            </> : <></>}
         </div>
     );
 };

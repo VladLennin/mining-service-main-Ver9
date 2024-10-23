@@ -31,22 +31,22 @@ const UsersPage = () => {
 
     const [showFilterDropdown, setShowFilterDropdown] = useState(false);
     const [showSortDropdown, setShowSortDropdown] = useState(false);
-    const [sortOption, setSortOption] = useState("");
+    const [sortOption, setSortOption] = useState("balance");
     const [sortDirection, setSortDirection] = useState<"ASC" | "DESC">("DESC");
     const [selectedLanguages, setSelectedLanguages] = useState<string[]>([]);
     const [isBot, setIsBot] = useState<boolean>(false);
 
     const [ranges, setRanges] = useState({
-        param1: [0, 100],
-        param2: [0, 100],
-        param3: [0, 100],
-        param4: [0, 100],
+        param1: [0, 0],
+        param2: [0, 0],
+        param3: [0, 0],
+        param4: [0, 0],
     });
     const [selectedRanges, setSelectedRanges] = useState({
-        param1: [0, 100],
-        param2: [0, 100],
-        param3: [0, 100],
-        param4: [0, 100],
+        param1: [0, 0],
+        param2: [0, 0],
+        param3: [0, 0],
+        param4: [0, 0],
     });
 
 
@@ -59,8 +59,6 @@ const UsersPage = () => {
         selectedLanguages: string[],
         isBot: boolean,
         selectedRanges: { param1: number[], param2: number[], param3: number[], param4: number[] }
-
-
     ) => {
         setError(null);
         try {
@@ -71,7 +69,7 @@ const UsersPage = () => {
             const languages = selectedLanguages.length > 0 ? selectedLanguages.join(',') : '';
             const botFilter = isBot ? '&isBot=1' : '';
 
-            const url = `https://modok-play-back.online/api/user/all?limit=${limit}&page=${page}&value=${searchValue}&sortOrder=${sortDirection}&sortBy=${sortOption}&languageCode=${languages}${botFilter}&minBalance=${selectedRanges.param1[0]}&maxBalance=${selectedRanges.param1[1]}&minEarned=${selectedRanges.param2[0]}&maxEarned=${selectedRanges.param2[1]}&minDiamondsBalance=${selectedRanges.param3[0]}&maxDiamondsBalance=${selectedRanges.param3[1]}&minReferrals=${selectedRanges.param4[0]}&maxReferrals=${selectedRanges.param4[1]}`;
+            const url = `https://modok-play-back.online/api/user/all?limit=${limit}&page=${page}&value=${searchValue}&sortOrder=${sortDirection}&sortBy=${sortOption}&languageCode=${languages}${botFilter}&minBalance=${selectedRanges.param1[0]}${selectedRanges.param1[1] > 0 ? `&maxBalance=${selectedRanges.param1[1]}` : ''}&minEarned=${selectedRanges.param2[0]}${selectedRanges.param2[1] > 0 ? `&maxEarned=${selectedRanges.param2[1]}` : ''}&minDiamondsBalance=${selectedRanges.param3[0]}${selectedRanges.param3[1] > 0 ? `&maxDiamondsBalance=${selectedRanges.param3[1]}` : ''}&minReferrals=${selectedRanges.param4[0]}${selectedRanges.param4[1] > 0 ? `&maxReferrals=${selectedRanges.param4[1]}` : ''}`;
 
             const response = await fetch(url, {headers});
             if (!response.ok) {
@@ -103,15 +101,14 @@ const UsersPage = () => {
             }
 
             const result = await response.json();
-            setRanges({
-                param1: [Number(result.minMaxValues.minBalance),  Number(result.minMaxValues.maxBalance)],
+            setSelectedRanges({
+                param1: [Number(result.minMaxValues.minBalance), Number(result.minMaxValues.maxBalance)],
                 param2: [result.minMaxValues.minEarned, result.minMaxValues.maxEarned],
                 param3: [result.minMaxValues.minDiamondsBalance, result.minMaxValues.maxDiamondsBalance],
                 param4: [result.minMaxValues.minReferrals, result.minMaxValues.maxReferrals],
             });
-
-            setSelectedRanges({
-                param1: [Number(result.minMaxValues.minBalance),  Number(result.minMaxValues.maxBalance)],
+            setRanges({
+                param1: [Number(result.minMaxValues.minBalance), Number(result.minMaxValues.maxBalance)],
                 param2: [result.minMaxValues.minEarned, result.minMaxValues.maxEarned],
                 param3: [result.minMaxValues.minDiamondsBalance, result.minMaxValues.maxDiamondsBalance],
                 param4: [result.minMaxValues.minReferrals, result.minMaxValues.maxReferrals],
@@ -144,17 +141,13 @@ const UsersPage = () => {
 
     useEffect(() => {
         checkTokenExpiry(navigate);
-        const delayDebounceFn = setTimeout(() => {
-            fetchData(page, limit, searchTerm, sortOption,sortDirection, selectedLanguages, isBot, selectedRanges);
-        }, 500);
-
-        return () => clearTimeout(delayDebounceFn);
+        fetchData(page, limit, searchTerm, sortOption, sortDirection, selectedLanguages, isBot, selectedRanges);
     }, [selectedRanges]);
 
     useEffect(() => {
         getFiltersInfo()
-        fetchData(page, limit, searchTerm, sortOption,sortDirection, selectedLanguages, isBot,selectedRanges); // Fetch data after delay
-    }, [page, limit, searchTerm, sortOption,sortDirection, selectedLanguages, isBot]);
+        fetchData(page, limit, searchTerm, sortOption, sortDirection, selectedLanguages, isBot, selectedRanges); // Fetch data after delay
+    }, [page, limit, searchTerm, sortOption, sortDirection, selectedLanguages, isBot]);
 
     useEffect(() => {
         updatePageNumbers(totalPages, page);
@@ -196,7 +189,7 @@ const UsersPage = () => {
 
         // Установить новый таймер для обновления данных
         searchTimeout.current = setTimeout(() => {
-            fetchData(1, limit, e.target.value, sortOption,sortDirection, selectedLanguages, isBot,selectedRanges);
+            fetchData(1, limit, e.target.value, sortOption, sortDirection, selectedLanguages, isBot, selectedRanges);
         }, 100); // Вызов API с небольшой задержкой, чтобы избежать частых запросов
     };
 
@@ -303,7 +296,7 @@ const UsersPage = () => {
     const handleBotChange = () => {
         setIsBot(prev => !prev);
     };
-    const handleSliderChange = (param:any, values:any) => {
+    const handleSliderChange = (param: any, values: any) => {
         setSelectedRanges((prevState) => ({
             ...prevState,
             [param]: values,
@@ -326,7 +319,8 @@ const UsersPage = () => {
                     <div className={'flex items-center justify-center px-2 gap-4 lg:w-1/4'}>
                         <div className="relative w-1/2">
                             <button onClick={toggleFilterDropdown}
-                                    className="p-2 border rounded bg-gray-200 w-full flex items-center lg:justify-around justify-center lg:gap-0 gap-4"><img src={FilterIcon} alt={''} width={18} height={18}/>Фильтры
+                                    className="p-2 border rounded bg-gray-200 w-full flex items-center lg:justify-around justify-center lg:gap-0 gap-4">
+                                <img src={FilterIcon} alt={''} width={18} height={18}/>Фильтры
                             </button>
                             {showFilterDropdown && (
                                 <div
@@ -436,35 +430,47 @@ const UsersPage = () => {
                         </div>
                         <div className="relative w-1/2">
                             <button onClick={toggleSortDropdown}
-                                    className="p-2 border rounded bg-gray-200 w-full flex items-center lg:justify-around justify-center lg:gap-0 gap-4"><img src={SortIcon} alt={''} width={18} height={18}/>Сортировать
+                                    className="p-2 border rounded bg-gray-200 w-full flex items-center lg:justify-around justify-center lg:gap-0 gap-4">
+                                <img src={SortIcon} alt={''} width={18} height={18}/>Сортировать
                             </button>
                             {showSortDropdown && (
                                 <div
                                     className="absolute lg:left-1/2 left-1/3 transform -translate-x-1/2 mt-2 bg-white border rounded shadow-lg p-2 flex flex-col gap-4 w-64">
                                     <p className="cursor-pointer pt-2 px-2 flex items-center gap-2"
-                                       onClick={() => handleSortChange("language_code")}><img src={LanguageIcon} alt={''} width={18} height={18}/>Сортировать
+                                       onClick={() => handleSortChange("language_code")}><img src={LanguageIcon}
+                                                                                              alt={''} width={18}
+                                                                                              height={18}/>Сортировать
                                         по языку</p>
                                     <p className="cursor-pointer px-2  flex items-center gap-2"
-                                       onClick={() => handleSortChange("balance")}><img src={CoinsIcon} alt={''} width={18} height={18}/>Сортировать
+                                       onClick={() => handleSortChange("balance")}><img src={CoinsIcon} alt={''}
+                                                                                        width={18} height={18}/>Сортировать
                                         по
                                         балансу</p>
-                                    <p className="cursor-pointer px-2  flex items-center gap-2" onClick={() => handleSortChange("earned")}><img src={EarnIcon} alt={''} width={18} height={18}/>Сортировать
+                                    <p className="cursor-pointer px-2  flex items-center gap-2"
+                                       onClick={() => handleSortChange("earned")}><img src={EarnIcon} alt={''}
+                                                                                       width={18} height={18}/>Сортировать
                                         по
                                         заработанному</p>
                                     <p className="cursor-pointer px-2  flex items-center gap-2"
-                                       onClick={() => handleSortChange("diamondsBalance")}><img src={DiamondsIcon} alt={''} width={18} height={18}/>Сортировать
+                                       onClick={() => handleSortChange("diamondsBalance")}><img src={DiamondsIcon}
+                                                                                                alt={''} width={18}
+                                                                                                height={18}/>Сортировать
                                         по алмазам</p>
                                     <p className="cursor-pointer px-2 flex items-center gap-2"
-                                       onClick={() => handleSortChange("referralCount")}><img src={ReferralsIcon} alt={''} width={18} height={18}/>Сортировать
+                                       onClick={() => handleSortChange("referralCount")}><img src={ReferralsIcon}
+                                                                                              alt={''} width={18}
+                                                                                              height={18}/>Сортировать
                                         по рефералам</p>
                                     <div className="border-t mt-2 pt-2">
                                         <div onClick={() => handleDirectionChange('ASC')}
-                                             className={`cursor-pointer hover:bg-gray-200 p-2 flex items-center gap-2 ${sortDirection === 'ASC' ? 'bg-gray-200' : ''}`}><img src={SortUpIcon} alt={''} width={18} height={18}/>По
-                                            возрастанию
+                                             className={`cursor-pointer hover:bg-gray-200 p-2 flex items-center gap-2 ${sortDirection === 'ASC' ? 'bg-gray-200' : ''}`}>
+                                            <img src={SortUpIcon} alt={''} width={18} height={18}/>
+                                            От меньшего
                                         </div>
                                         <div onClick={() => handleDirectionChange('DESC')}
-                                             className={`cursor-pointer hover:bg-gray-200 p-2 flex items-center gap-2  ${sortDirection === 'DESC' ? 'bg-gray-200' : ''}`}><img className={'rotate-180'} src={SortUpIcon} alt={''} width={18} height={18}/>По
-                                            убыванию
+                                             className={`cursor-pointer hover:bg-gray-200 p-2 flex items-center gap-2  ${sortDirection === 'DESC' ? 'bg-gray-200' : ''}`}>
+                                            <img className={'rotate-180'} src={SortUpIcon} alt={''} width={18}
+                                                 height={18}/>От большего
                                         </div>
                                     </div>
                                 </div>
